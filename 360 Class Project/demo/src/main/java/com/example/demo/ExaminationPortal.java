@@ -1,8 +1,5 @@
 package com.example.demo;
 
-
-
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,15 +13,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ExaminationPortal {
     private Stage stage;
-
     public ExaminationPortal(Stage stage) {
         this.stage = stage; // ExaminationPage constructor
     }
-
     public void show() {
         VBox layout = createLayout();
         Scene scene = new Scene(layout, 300, 200);
@@ -36,24 +32,27 @@ public class ExaminationPortal {
 
     }
 
-
-
     private VBox createLayout() {
-
 
         // Set Title for the examination layout
         Label titleLabel = new Label("Healfy Examination");
-        titleLabel.setFont(Font.font("Arial", FontWeight.BLACK, 30));
+        titleLabel.setFont(Font.font("Arial", FontWeight.BLACK, 25));
         titleLabel.setTextFill(Color.web("#9741A5"));
         titleLabel.setAlignment(Pos.TOP_LEFT);
-        titleLabel.setPadding(new Insets(5));
+        titleLabel.setPadding(new Insets(3));
 
         // Create physical exam labels
         Label PhysicalExam = new Label("Physical Exam: ");
-        PhysicalExam.setFont(Font.font("Arial", FontWeight.BLACK, 18));
+        PhysicalExam.setFont(Font.font("Arial", FontWeight.BLACK, 15));
         PhysicalExam.setTextFill(Color.web("#9741A5"));
-        PhysicalExam.setPadding(new Insets(10));
+        PhysicalExam.setPadding(new Insets(4));
         PhysicalExam.setAlignment(Pos.CENTER_LEFT);
+
+        Label PatientID = new Label("Patient ID: ");
+        PatientID.setTextFill(Color.web("#9741A5"));
+        TextField IDTextField = new TextField();
+        IDTextField.setPrefWidth(225);
+        IDTextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
 
         Label VitalSigns = new Label("Vital Signs: ");
         VitalSigns.setTextFill(Color.web("#9741A5"));
@@ -61,13 +60,11 @@ public class ExaminationPortal {
         VSTextField.setPrefWidth(225);
         VSTextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
 
-
         Label VisionAcuity = new Label("Vision Acuity: ");
         VisionAcuity.setTextFill(Color.web("#9741A5"));
         TextField VATextField = new TextField();
         VATextField.setPrefWidth(225);
         VATextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
-
 
         Label CardiovascularHealth = new Label("Cardiovascular Health: ");
         CardiovascularHealth.setTextFill(Color.web("#9741A5"));
@@ -110,6 +107,12 @@ public class ExaminationPortal {
         PrescribeMedication.setTextFill(Color.web("#9741A5"));
         PrescribeMedication.setPadding(new Insets(10));
 
+        Label PatientName = new Label("Patient Name: ");
+        PatientName.setTextFill(Color.web("#9741A5"));
+        TextField PNTextField = new TextField();
+        PNTextField.setMaxWidth(225);
+        PNTextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
+
         Label Medication = new Label("Medication: ");
         Medication.setTextFill(Color.web("#9741A5"));
         TextField MedTextField = new TextField();
@@ -130,7 +133,6 @@ public class ExaminationPortal {
         NoteTextArea.setWrapText(true);
         NoteTextArea.setStyle("-fx-control-inner-background: #ECECEC; -fx-background-radius: 10px;");
 
-
         // Submit Button
         Button submitButton = new Button("Submit");
         submitButton.setStyle("-fx-background-color: #E2CE15; -fx-background-radius: 5");
@@ -139,6 +141,7 @@ public class ExaminationPortal {
         submitButton.setOnAction(e -> {
 
             // Retrieves the text entered
+            String IDText = IDTextField.getText();
             String VSText = VSTextField.getText();
             String VAText = VATextField.getText();
             String CHText = CHTextField.getText();
@@ -154,41 +157,39 @@ public class ExaminationPortal {
                 // Display error message if there is missing text filled
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setTitle("Submit Error");                                           // Display string Error as alert title
-                errorAlert.setHeaderText("Missing Information!");                              // Display Missing Information as alert header
-                errorAlert.setContentText("Please fill in all the required text field!");      // Display message on the alert content
+                errorAlert.setHeaderText("Required Information Missing");                      // Display alert header
+                errorAlert.setContentText("Please ensure all required text fields are filled. " +
+                                            "If no exam data is available, enter 'None'.");    // Display content alert
                 errorAlert.showAndWait();
-                return;
             }
 
-            /*
             else{
 
-                // Create patient information FILE based on the intake form
-                Patient newPatient = new Patient(patientID, firstNameText, lastNameText, emailText, phoneNumberText, healthHistoryText, insuranceIDText, examDate);
+                // Create patient information FILE
+                Patient newPatient = new Patient(IDText, VSText, VAText, CHText, RHText, NHText, MAText, SLNText, DiagText);
 
                 // Save patient information to a file
                 savePatientInfoToFile(newPatient);
 
                 // Display success message after save button is clicked
                 Alert intakeAlert = new Alert(Alert.AlertType.INFORMATION);
-                intakeAlert.setTitle("Patient Intake");
-                intakeAlert.setHeaderText("Saved successfully!");
-                intakeAlert.setContentText("Patient Name: " + firstNameText + " " + lastNameText + "\nPatient ID: " + patientID +
-                        "\nExam Date: " + examDate.format(dateFormatter) + "\nContact Number: " + phoneNumberText);
+                intakeAlert.setTitle("Success");
+                intakeAlert.setHeaderText("Patient ID: " + IDText);
+                intakeAlert.setContentText("The data has been saved successfully");
                 intakeAlert.showAndWait();
 
-
-                // Clear the input fields after patient info saved
-                firstNameTextField.clear();                                               // Clear first name text field
-                lastNameTextField.clear();                                                // Clear last name text field
-                emailTextField.clear();                                                   // Clear email text field
-                phoneNumberTextField.clear();                                             // Clear phone number text field
-                healthHistoryTextField.clear();                                           // Clear health history text field
-                insuranceIDTextField.clear();                                             // Clear insurance ID text field
+                // Clear the input fields after submit successfully
+                IDTextField.clear();
+                VSTextField.clear();
+                VATextField.clear();
+                CHTextField.clear();
+                RHTextField.clear();
+                NHTextField.clear();
+                MATextField.clear();
+                SLNTextField.clear();
+                DiagTextField.clear();
 
             }
-*/
-
 
         });
 
@@ -199,7 +200,52 @@ public class ExaminationPortal {
         SendPreButton.setPrefWidth(120);
         SendPreButton.setPrefHeight(30);
         SendPreButton.setAlignment(Pos.CENTER);
+        SendPreButton.setOnAction(e -> {
 
+            // Retrieves the text entered
+            String PatientNameText = PNTextField.getText();
+            String MedicationText = MedTextField.getText();
+            String PharmacyText = PharTextField.getText();
+            String NoteText = NoteTextArea.getText();
+
+
+            // Check if all the required text fields are filled, patient record file will not save if there is more than 1 text fields(info) missing
+            if (PatientNameText.isEmpty() || MedicationText.isEmpty() || PharmacyText.isEmpty() || NoteText.isEmpty()) {
+
+
+                // Display error message if there is missing text filled
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Send Error");                                             // Display string Error as alert title
+                errorAlert.setHeaderText("Required Information Missing");                      // Display  alert header
+                errorAlert.setContentText("Please ensure all required text fields are filled. " +
+                                          "If no data is available, enter 'None'.");           // Display content alert
+                errorAlert.showAndWait();
+            }
+
+            else{
+
+                // Create patient information FILE
+                Prescription newPrescription = new Prescription(PatientNameText,MedicationText, PharmacyText, NoteText);
+
+                // Save patient information to a file
+                savePrescriptionInfoToFile(newPrescription);
+
+                // Display success message after save button is clicked
+                Alert intakeAlert = new Alert(Alert.AlertType.INFORMATION);
+                intakeAlert.setTitle("Success");
+                intakeAlert.setHeaderText("Patient Name:" + PatientNameText);
+                intakeAlert.setContentText("The prescription has been sent successfully");
+                intakeAlert.showAndWait();
+
+                // Clear the input fields after submit successfully
+                PNTextField.clear();
+                MedTextField.clear();
+                PharTextField.clear();
+                NoteTextArea.clear();
+
+            }
+
+        });
 
 
         // Back to main view (Log out button)
@@ -215,7 +261,7 @@ public class ExaminationPortal {
 
 
         // Set left section
-        VBox PhysicalExamSection = new VBox(2,PhysicalExam, VitalSigns, VSTextField, VisionAcuity, VATextField, CardiovascularHealth, CHTextField, RespiratoryHealth,
+        VBox PhysicalExamSection = new VBox(1,PhysicalExam, PatientID, IDTextField, VitalSigns, VSTextField, VisionAcuity, VATextField, CardiovascularHealth, CHTextField, RespiratoryHealth,
                 RHTextField, NeuroHealth, NHTextField, MusculoskeletalAssessment, MATextField, SkinAndLymphNodes, SLNTextField, Diagnosis, DiagTextField, submitButton);
         PhysicalExamSection.setBackground(new Background(new BackgroundFill(Color.web("#FFFFFE"), CornerRadii.EMPTY, Insets.EMPTY))); // Setting background color
         PhysicalExamSection.setPadding(new Insets(20, 20, 20, 20));
@@ -223,7 +269,7 @@ public class ExaminationPortal {
 
 
         // Set right section
-        VBox PrescribeMedicationSection = new VBox(2,PrescribeMedication, Medication, MedTextField, Pharmacy, PharTextField, Notes, NoteTextArea, SendPreButton);
+        VBox PrescribeMedicationSection = new VBox(1,PrescribeMedication, PatientName, PNTextField, Medication, MedTextField, Pharmacy, PharTextField, Notes, NoteTextArea, SendPreButton);
         PrescribeMedicationSection.setBackground(new Background(new BackgroundFill(Color.web("#FFFFFE"), CornerRadii.EMPTY, Insets.EMPTY))); // Setting background color
         PrescribeMedicationSection.setPadding(new Insets(20, 20, 20, 20));
         PrescribeMedicationSection.setAlignment(Pos.CENTER_LEFT);
@@ -240,17 +286,126 @@ public class ExaminationPortal {
         LogoutButtonLayout.setPadding(new Insets(0,10,10,0));
 
 
-
         VBox layout = new VBox();
         layout.getChildren().addAll(titleLabel, Hlayout, LogoutButtonLayout);
-
-
-
-
 
       return layout;
 
     }
 
 
+    // A private class to hold patient's information
+    private class Patient {
+        // private instance variables for storing the patient's info
+        private String PatientID, VitalSigns , VisionAcuity , CardiovascularHealth , RespiratoryHealth,
+                NeuroHealth , MusculoskeletalAssessment, SkinAndLymphNodes, Diagnosis;
+
+        // constructor of the Patient class takes the necessary information to create a Patient object and initializes the instance variables with the provided values
+        public Patient (String PatientID, String VitalSigns, String VisionAcuity, String CardiovascularHealth, String RespiratoryHealth, String NeuroHealth,
+                        String MusculoskeletalAssessment, String SkinAndLymphNodes, String Diagnosis) {
+            this.PatientID = PatientID;
+            this.VitalSigns =  VitalSigns;
+            this.VisionAcuity = VisionAcuity;
+            this.CardiovascularHealth = CardiovascularHealth;
+            this.RespiratoryHealth = RespiratoryHealth;
+            this.NeuroHealth = NeuroHealth;
+            this.MusculoskeletalAssessment = MusculoskeletalAssessment;
+            this.SkinAndLymphNodes = SkinAndLymphNodes;
+            this.Diagnosis = Diagnosis;
+
+        }
+
+        public String getPatientID() {                                                        // getter method that returns the patient's ID
+            return PatientID;
+        }
+        public String getVitalSigns() {                                                        // getter method that returns the patient's first name
+            return VitalSigns;
+        }
+        public String getVisionAcuity() {                                                         // getter method that returns the patient's last name
+            return VisionAcuity;
+        }
+        public String getCardiovascularHealth() {                                                            // getter method that returns the patient's email
+            return CardiovascularHealth;
+        }
+        public String getRespiratoryHealth() {                                                      // getter method that returns the patient's phone number
+            return RespiratoryHealth;
+        }
+        public String getNeuroHealth() {                                                    // getter method that returns the patient's health history
+            return NeuroHealth;
+        }
+        public String getMusculoskeletalAssessment() {                                                      // getter method that returns the patient's insurance ID
+            return MusculoskeletalAssessment;
+        }
+        public String getSkinAndLymphNodes() {                                                         // getter method that returns the patient's exam date
+            return SkinAndLymphNodes;
+        }
+        public String getDiagnosis() {                                                      // getter method that returns the patient's insurance ID
+            return Diagnosis;
+        }
+
+
+
+    }
+
+    // Class to hold Prescription info
+    private class Prescription {
+        // private instance variables for storing the patient's info
+        private String  PatientName, Medication, Pharmacy, Note;
+        // constructor of the Patient class takes the necessary information to create a Patient object and initializes the instance variables with the provided values
+        public Prescription (String PatientName, String Medication, String Pharmacy, String Note) {
+
+            this.PatientName = PatientName;
+            this.Medication = Medication;
+            this.Pharmacy = Pharmacy;
+            this.Note = Note;
+        }
+        public String getPatientName() {                                                      // getter method that returns the patient's insurance ID
+            return PatientName;
+        }
+        public String getMedication() {                                                      // getter method that returns the patient's insurance ID
+            return Medication;
+        }
+        public String getPharmacy() {                                                      // getter method that returns the patient's insurance ID
+            return Pharmacy;
+        }
+        public String getNote() {                                                      // getter method that returns the patient's insurance ID
+            return Note;
+        }
+
+    }
+
+    private void savePatientInfoToFile(Patient newPatient) {
+        String patientFileName = newPatient.getPatientID() + "_PatientExamData.txt";        // Create a patient file named xxxxx_PatientExamData.txt
+
+        try (FileWriter fileWriter = new FileWriter(patientFileName)) {                    // Open try block and used for exception handling and ensures fileWriter resource is used properly
+
+            fileWriter.write("Patient ID: " + newPatient.getPatientID());
+            fileWriter.write("\nVital Signs: " + newPatient.getVitalSigns());
+            fileWriter.write("\nVision Acuity: " + newPatient.getVisionAcuity());
+            fileWriter.write("\nCardiovascular Health: " + newPatient.getCardiovascularHealth());
+            fileWriter.write("\nRespiratory Health,: " + newPatient.getRespiratoryHealth());
+            fileWriter.write("\nNeuro Health, : " + newPatient.getNeuroHealth());
+            fileWriter.write("\nMusculoskeletal Assessment: " + newPatient.getMusculoskeletalAssessment());
+            fileWriter.write("\nSkin And Lymph Nodes: " + newPatient.getSkinAndLymphNodes());
+            fileWriter.write("\nDiagnosis: " + newPatient.getDiagnosis());
+
+        } catch (IOException event) {       // This line starts a catch block and specifies that if an IOException occurs within the try block, the following code will handle the exception
+            event.printStackTrace();        // prints the stack trace of the exception that occurred, providing information about where and how the exception was thrown
+        }
+    }
+
+    private void savePrescriptionInfoToFile(Prescription newPrescription) {
+        String prescriptionFileName = newPrescription.getPatientName() + "_Medication.txt";      // Create a patient file named Name_Medication.txt
+
+        try (FileWriter fileWriter = new FileWriter(prescriptionFileName)) {                    // Open try block and used for exception handling and ensures fileWriter resource is used properly
+
+            fileWriter.write("Patient Name: " + newPrescription.getPatientName());
+            fileWriter.write("\nMedication: " + newPrescription.getMedication());
+            fileWriter.write("\nPharmacy: " + newPrescription.getPharmacy());
+            fileWriter.write("\nNotes: " + newPrescription.getNote());
+
+        } catch (IOException event) {       // This line starts a catch block and specifies that if an IOException occurs within the try block, the following code will handle the exception
+            event.printStackTrace();        // prints the stack trace of the exception that occurred, providing information about where and how the exception was thrown
+        }
+    }
 }
