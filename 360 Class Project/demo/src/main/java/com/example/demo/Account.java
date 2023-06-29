@@ -53,6 +53,11 @@ public class Account {
         return temp;
     }
 
+    public int getID()
+    {
+        return userId;
+    }
+
     // need message stuff to be made first
     public void addMessage() {
         //todo
