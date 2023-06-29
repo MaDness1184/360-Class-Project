@@ -1,6 +1,8 @@
 package com.example.demo;
 
 
+
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.control.TextArea;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -23,21 +26,23 @@ public class ExaminationPortal {
     }
 
     public void show() {
-        BorderPane layout = createBorderPane();
+        VBox layout = createLayout();
         Scene scene = new Scene(layout, 300, 200);
         stage.setScene(scene);
+        stage.setTitle("Examination Portal");         // Set the title of the stage
         stage.show();
         layout.requestFocus();
         layout.setBackground(new Background(new BackgroundFill(Color.web("#FFFFFE"), CornerRadii.EMPTY, Insets.EMPTY)));
+
     }
 
 
 
-    private BorderPane createBorderPane() {
+    private VBox createLayout() {
 
 
         // Set Title for the examination layout
-        Label titleLabel = new Label("Healfy");
+        Label titleLabel = new Label("Healfy Examination");
         titleLabel.setFont(Font.font("Arial", FontWeight.BLACK, 30));
         titleLabel.setTextFill(Color.web("#9741A5"));
         titleLabel.setAlignment(Pos.TOP_LEFT);
@@ -53,51 +58,51 @@ public class ExaminationPortal {
         Label VitalSigns = new Label("Vital Signs: ");
         VitalSigns.setTextFill(Color.web("#9741A5"));
         TextField VSTextField = new TextField();
-        VSTextField.setMaxWidth(225);
+        VSTextField.setPrefWidth(225);
         VSTextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
 
 
         Label VisionAcuity = new Label("Vision Acuity: ");
         VisionAcuity.setTextFill(Color.web("#9741A5"));
         TextField VATextField = new TextField();
-        VATextField.setMaxWidth(225);
+        VATextField.setPrefWidth(225);
         VATextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
 
 
         Label CardiovascularHealth = new Label("Cardiovascular Health: ");
         CardiovascularHealth.setTextFill(Color.web("#9741A5"));
         TextField CHTextField = new TextField();
-        CHTextField.setMaxWidth(225);
+        CHTextField.setPrefWidth(225);
         CHTextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
 
         Label RespiratoryHealth = new Label("Respiratory Health: ");
         RespiratoryHealth.setTextFill(Color.web("#9741A5"));
         TextField RHTextField = new TextField();
-        RHTextField.setMaxWidth(225);
+        RHTextField.setPrefWidth(225);
         RHTextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
 
         Label NeuroHealth = new Label("Neuro Health: ");
         NeuroHealth.setTextFill(Color.web("#9741A5"));
         TextField NHTextField = new TextField();
-        NHTextField.setMaxWidth(225);
+        NHTextField.setPrefWidth(225);
         NHTextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
 
         Label MusculoskeletalAssessment = new Label("Musculoskeletal Assessment: ");
         MusculoskeletalAssessment.setTextFill(Color.web("#9741A5"));
         TextField MATextField = new TextField();
-        MATextField.setMaxWidth(225);
+        MATextField.setPrefWidth(225);
         MATextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
 
         Label SkinAndLymphNodes = new Label("Skin and Lymph Nodes: ");
         SkinAndLymphNodes.setTextFill(Color.web("#9741A5"));
         TextField SLNTextField = new TextField();
-        SLNTextField.setMaxWidth(225);
+        SLNTextField.setPrefWidth(225);
         SLNTextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
 
         Label Diagnosis = new Label("Diagnosis: ");
         Diagnosis.setTextFill(Color.web("#9741A5"));
         TextField DiagTextField = new TextField();
-        DiagTextField.setMaxWidth(225);
+        DiagTextField.setPrefWidth(225);
         DiagTextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
 
         Label PrescribeMedication = new Label("Prescribe Medication: ");
@@ -114,15 +119,16 @@ public class ExaminationPortal {
         Label Pharmacy = new Label("Pharmacy: ");
         Pharmacy.setTextFill(Color.web("#9741A5"));
         TextField PharTextField = new TextField();
-        PharTextField.setMaxWidth(225);
+        PharTextField.setPrefWidth(225);
         PharTextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
 
         Label Notes = new Label("Notes: ");
         Notes.setTextFill(Color.web("#9741A5"));
-        TextField NoteTextField = new TextField();
-        NoteTextField.setMaxWidth(225);
-        NoteTextField.setMaxHeight(300);
-        NoteTextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
+        TextArea NoteTextArea = new TextArea();
+        NoteTextArea.setPrefWidth(200);
+        NoteTextArea.setPrefHeight(200);
+        NoteTextArea.setWrapText(true);
+        NoteTextArea.setStyle("-fx-control-inner-background: #ECECEC; -fx-background-radius: 10px;");
 
 
         // Submit Button
@@ -130,55 +136,6 @@ public class ExaminationPortal {
         submitButton.setStyle("-fx-background-color: #E2CE15; -fx-background-radius: 5");
         submitButton.setPrefWidth(70);
         submitButton.setPrefHeight(25);
-
-        // Send Prescription Button
-        Button SendPreButton = new Button("Send Prescription");
-        SendPreButton.setStyle("-fx-background-color: #E2CE15; -fx-background-radius: 5");
-        SendPreButton.setPrefWidth(150);
-        SendPreButton.setPrefHeight(30);
-        SendPreButton.setAlignment(Pos.CENTER);
-
-
-        // Back to main view (Log out button)
-        Button LogoutButton = new Button("Logout");      // Create Log Out button
-        LogoutButton.setStyle("-fx-background-color: #FFA500; -fx-background-radius: 5");
-        LogoutButton.setPrefWidth(70);
-        LogoutButton.setPrefHeight(25);
-        LogoutButton.setAlignment(Pos.BOTTOM_RIGHT);
-        LogoutButton.setOnAction(event -> {                 // Take user back to login page view
-            LoginPage loginPage = new LoginPage(stage);
-            loginPage.show();
-        });
-
-
-        // Set left section
-        VBox PhysicalExamSection = new VBox(PhysicalExam, VitalSigns, VSTextField, VisionAcuity, VATextField, CardiovascularHealth, CHTextField, RespiratoryHealth,
-                RHTextField, NeuroHealth, NHTextField, MusculoskeletalAssessment, MATextField, SkinAndLymphNodes, SLNTextField, Diagnosis, DiagTextField, submitButton);
-        PhysicalExamSection.setBackground(new Background(new BackgroundFill(Color.web("#FFFFFE"), CornerRadii.EMPTY, Insets.EMPTY))); // Setting background color
-        PhysicalExamSection.setPadding(new Insets(20, 20, 20, 20));
-        PhysicalExamSection.setAlignment(Pos.CENTER_LEFT);
-
-
-
-        // Set right section
-        VBox PrescribeMedicationSection = new VBox(PrescribeMedication, Medication, MedTextField, Pharmacy, PharTextField, Notes, NoteTextField, SendPreButton);
-        PrescribeMedicationSection.setBackground(new Background(new BackgroundFill(Color.web("#FFFFFE"), CornerRadii.EMPTY, Insets.EMPTY))); // Setting background color
-        PrescribeMedicationSection.setPadding(new Insets(20, 20, 20, 20));
-        PrescribeMedicationSection.setAlignment(Pos.CENTER_LEFT);
-
-
-        // Set the general position of each section
-        BorderPane layout = new BorderPane();
-        layout.setTop(titleLabel);
-        layout.setCenter(PhysicalExamSection);
-        layout.setRight(PrescribeMedicationSection);
-
-
-
-
-
-
-/*
         submitButton.setOnAction(e -> {
 
             // Retrieves the text entered
@@ -230,11 +187,66 @@ public class ExaminationPortal {
                 insuranceIDTextField.clear();                                             // Clear insurance ID text field
 
             }
-
+*/
 
 
         });
-*/
+
+
+        // Send Prescription Button
+        Button SendPreButton = new Button("Send Prescription");
+        SendPreButton.setStyle("-fx-background-color: #E2CE15; -fx-background-radius: 5");
+        SendPreButton.setPrefWidth(120);
+        SendPreButton.setPrefHeight(30);
+        SendPreButton.setAlignment(Pos.CENTER);
+
+
+
+        // Back to main view (Log out button)
+        Button LogoutButton = new Button("Logout");      // Create Log Out button
+        LogoutButton.setStyle("-fx-background-color: #FFA500; -fx-background-radius: 5");
+        LogoutButton.setPrefWidth(70);
+        LogoutButton.setPrefHeight(25);
+        LogoutButton.setAlignment(Pos.CENTER);
+        LogoutButton.setOnAction(event -> {                 // Take user back to login page view
+            LoginPage loginPage = new LoginPage(stage);
+            loginPage.show();
+        });
+
+
+        // Set left section
+        VBox PhysicalExamSection = new VBox(2,PhysicalExam, VitalSigns, VSTextField, VisionAcuity, VATextField, CardiovascularHealth, CHTextField, RespiratoryHealth,
+                RHTextField, NeuroHealth, NHTextField, MusculoskeletalAssessment, MATextField, SkinAndLymphNodes, SLNTextField, Diagnosis, DiagTextField, submitButton);
+        PhysicalExamSection.setBackground(new Background(new BackgroundFill(Color.web("#FFFFFE"), CornerRadii.EMPTY, Insets.EMPTY))); // Setting background color
+        PhysicalExamSection.setPadding(new Insets(20, 20, 20, 20));
+        PhysicalExamSection.setAlignment(Pos.CENTER_LEFT);
+
+
+        // Set right section
+        VBox PrescribeMedicationSection = new VBox(2,PrescribeMedication, Medication, MedTextField, Pharmacy, PharTextField, Notes, NoteTextArea, SendPreButton);
+        PrescribeMedicationSection.setBackground(new Background(new BackgroundFill(Color.web("#FFFFFE"), CornerRadii.EMPTY, Insets.EMPTY))); // Setting background color
+        PrescribeMedicationSection.setPadding(new Insets(20, 20, 20, 20));
+        PrescribeMedicationSection.setAlignment(Pos.CENTER_LEFT);
+
+
+        HBox Hlayout = new HBox();
+        Hlayout.setSpacing(80);
+        Hlayout.getChildren().addAll(PhysicalExamSection, PrescribeMedicationSection);
+        Hlayout.setAlignment(Pos.CENTER);
+
+        HBox LogoutButtonLayout = new HBox();
+        LogoutButtonLayout.getChildren().addAll(LogoutButton);
+        LogoutButtonLayout.setAlignment(Pos.BOTTOM_RIGHT);
+        LogoutButtonLayout.setPadding(new Insets(0,10,10,0));
+
+
+
+        VBox layout = new VBox();
+        layout.getChildren().addAll(titleLabel, Hlayout, LogoutButtonLayout);
+
+
+
+
 
       return layout;
 
