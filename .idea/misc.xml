@@ -4,15 +4,11 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/demo/pom.xml" />
+        <option value="$PROJECT_DIR$/360 Class Project/demo/pom.xml" />
       </list>
     </option>
   </component>
-<<<<<<< HEAD
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="temurin-20" project-jdk-type="JavaSDK">
-=======
   <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
->>>>>>> fb05ac648b75a3013d2e592912bf5837169eb35f
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

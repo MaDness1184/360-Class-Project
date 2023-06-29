@@ -178,7 +178,7 @@ public class ExaminationPortal {
 
 
 
-
+/*
         submitButton.setOnAction(e -> {
 
             // Retrieves the text entered
@@ -231,11 +231,10 @@ public class ExaminationPortal {
 
             }
 
-*/
 
 
         });
-
+*/
 
       return layout;
 
