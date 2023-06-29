@@ -24,6 +24,7 @@ public class LoginPage {
         stage.show();
     }
 
+
     private VBox createLayout() {
         // VBox to encapsulate all content
         VBox layout = new VBox(10);
@@ -57,7 +58,7 @@ public class LoginPage {
         loginButton.setStyle("-fx-background-color: #E2CE15; -fx-background-radius: 5");
         loginButton.setMinWidth(100);
         loginButton.setOnAction(e -> {
-            PatientPortal patientPortal = new PatientPortal(stage);
+            ExaminationPortal patientPortal = new ExaminationPortal(stage);
             patientPortal.show();
         });
 
@@ -74,4 +75,6 @@ public class LoginPage {
         layout.getChildren().addAll(welcomeLabel, signInLabel, usernameField, passwordField, loginButton, createAccountButton);
         return layout;
     }
+
+
 }
