@@ -119,17 +119,29 @@ public class ExaminationPortal {
         MedTextField.setMaxWidth(225);
         MedTextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
 
-        Label Pharmacy = new Label("Pharmacy: ");
-        Pharmacy.setTextFill(Color.web("#9741A5"));
-        TextField PharTextField = new TextField();
-        PharTextField.setPrefWidth(225);
-        PharTextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
+        Label PharmacyName = new Label("Pharmacy Name: ");
+        PharmacyName.setTextFill(Color.web("#9741A5"));
+        TextField PharNameTextField = new TextField();
+        PharNameTextField.setPrefWidth(225);
+        PharNameTextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
+
+        Label PharmacyLocation = new Label("Pharmacy Location: ");
+        PharmacyLocation.setTextFill(Color.web("#9741A5"));
+        TextField PharLocTextField = new TextField();
+        PharLocTextField.setPrefWidth(225);
+        PharLocTextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
+
+        Label PharmacyPhone = new Label("Pharmacy Phone Number: ");
+        PharmacyPhone.setTextFill(Color.web("#9741A5"));
+        TextField PharPhoneTextField = new TextField();
+        PharPhoneTextField.setPrefWidth(225);
+        PharPhoneTextField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
 
         Label Notes = new Label("Notes: ");
         Notes.setTextFill(Color.web("#9741A5"));
         TextArea NoteTextArea = new TextArea();
         NoteTextArea.setPrefWidth(200);
-        NoteTextArea.setPrefHeight(200);
+        NoteTextArea.setPrefHeight(120);
         NoteTextArea.setWrapText(true);
         NoteTextArea.setStyle("-fx-control-inner-background: #ECECEC; -fx-background-radius: 10px;");
 
@@ -205,12 +217,14 @@ public class ExaminationPortal {
             // Retrieves the text entered
             String PatientNameText = PNTextField.getText();
             String MedicationText = MedTextField.getText();
-            String PharmacyText = PharTextField.getText();
+            String PharNameText = PharNameTextField.getText();
+            String PharLocText = PharLocTextField.getText();
+            String PharPhoneText = PharPhoneTextField.getText();
             String NoteText = NoteTextArea.getText();
 
 
             // Check if all the required text fields are filled, patient record file will not save if there is more than 1 text fields(info) missing
-            if (PatientNameText.isEmpty() || MedicationText.isEmpty() || PharmacyText.isEmpty() || NoteText.isEmpty()) {
+            if (PatientNameText.isEmpty() || MedicationText.isEmpty() || PharNameText.isEmpty() || PharLocText.isEmpty() || PharPhoneText.isEmpty() || NoteText.isEmpty()) {
 
 
                 // Display error message if there is missing text filled
@@ -225,7 +239,7 @@ public class ExaminationPortal {
             else{
 
                 // Create patient information FILE
-                Prescription newPrescription = new Prescription(PatientNameText,MedicationText, PharmacyText, NoteText);
+                Prescription newPrescription = new Prescription(PatientNameText,MedicationText, PharNameText, PharLocText, PharPhoneText, NoteText);
 
                 // Save patient information to a file
                 savePrescriptionInfoToFile(newPrescription);
@@ -240,8 +254,10 @@ public class ExaminationPortal {
                 // Clear the input fields after submit successfully
                 PNTextField.clear();
                 MedTextField.clear();
-                PharTextField.clear();
+                PharNameTextField.clear();
                 NoteTextArea.clear();
+                PharLocTextField.clear();
+                PharPhoneTextField.clear();
 
             }
 
@@ -262,14 +278,15 @@ public class ExaminationPortal {
 
         // Set left section
         VBox PhysicalExamSection = new VBox(1,PhysicalExam, PatientID, IDTextField, VitalSigns, VSTextField, VisionAcuity, VATextField, CardiovascularHealth, CHTextField, RespiratoryHealth,
-                RHTextField, NeuroHealth, NHTextField, MusculoskeletalAssessment, MATextField, SkinAndLymphNodes, SLNTextField, Diagnosis, DiagTextField, submitButton);
+                                        RHTextField, NeuroHealth, NHTextField, MusculoskeletalAssessment, MATextField, SkinAndLymphNodes, SLNTextField, Diagnosis, DiagTextField, submitButton);
         PhysicalExamSection.setBackground(new Background(new BackgroundFill(Color.web("#FFFFFE"), CornerRadii.EMPTY, Insets.EMPTY))); // Setting background color
         PhysicalExamSection.setPadding(new Insets(20, 20, 20, 20));
         PhysicalExamSection.setAlignment(Pos.CENTER_LEFT);
 
 
         // Set right section
-        VBox PrescribeMedicationSection = new VBox(1,PrescribeMedication, PatientName, PNTextField, Medication, MedTextField, Pharmacy, PharTextField, Notes, NoteTextArea, SendPreButton);
+        VBox PrescribeMedicationSection = new VBox(1,PrescribeMedication, PatientName, PNTextField, Medication, MedTextField, PharmacyName, PharNameTextField,
+                                                    PharmacyLocation, PharLocTextField, PharmacyPhone, PharPhoneTextField, Notes, NoteTextArea, SendPreButton);
         PrescribeMedicationSection.setBackground(new Background(new BackgroundFill(Color.web("#FFFFFE"), CornerRadii.EMPTY, Insets.EMPTY))); // Setting background color
         PrescribeMedicationSection.setPadding(new Insets(20, 20, 20, 20));
         PrescribeMedicationSection.setAlignment(Pos.CENTER_LEFT);
@@ -350,13 +367,13 @@ public class ExaminationPortal {
     // Class to hold Prescription info
     private class Prescription {
         // private instance variables for storing the patient's info
-        private String  PatientName, Medication, Pharmacy, Note;
+        private String  PatientName, Medication, PharmacyName, PharmacyLocation, PharmacyPhone, Note;
         // constructor of the Patient class takes the necessary information to create a Patient object and initializes the instance variables with the provided values
-        public Prescription (String PatientName, String Medication, String Pharmacy, String Note) {
+        public Prescription (String PatientName, String Medication, String PharmacyName, String PharmacyLocation, String PharmacyPhone, String Note) {
 
             this.PatientName = PatientName;
             this.Medication = Medication;
-            this.Pharmacy = Pharmacy;
+            this.PharmacyName = PharmacyName;
             this.Note = Note;
         }
         public String getPatientName() {                                                      // getter method that returns the patient's insurance ID
@@ -365,12 +382,10 @@ public class ExaminationPortal {
         public String getMedication() {                                                      // getter method that returns the patient's insurance ID
             return Medication;
         }
-        public String getPharmacy() {                                                      // getter method that returns the patient's insurance ID
-            return Pharmacy;
-        }
-        public String getNote() {                                                      // getter method that returns the patient's insurance ID
-            return Note;
-        }
+        public String getPharmacyName() { return PharmacyName; }
+        public String getPharmacyLocation() { return PharmacyLocation; }
+        public String getPharmacyPhone() { return PharmacyPhone; }
+        public String getNote() { return Note; }
 
     }
 
@@ -401,7 +416,9 @@ public class ExaminationPortal {
 
             fileWriter.write("Patient Name: " + newPrescription.getPatientName());
             fileWriter.write("\nMedication: " + newPrescription.getMedication());
-            fileWriter.write("\nPharmacy: " + newPrescription.getPharmacy());
+            fileWriter.write("\nPharmacy: " + newPrescription.getPharmacyName());
+            fileWriter.write("\nPharmacy: " + newPrescription.getPharmacyLocation());
+            fileWriter.write("\nPharmacy: " + newPrescription.getPharmacyPhone());
             fileWriter.write("\nNotes: " + newPrescription.getNote());
 
         } catch (IOException event) {       // This line starts a catch block and specifies that if an IOException occurs within the try block, the following code will handle the exception
