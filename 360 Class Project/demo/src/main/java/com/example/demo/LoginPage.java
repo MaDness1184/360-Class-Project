@@ -58,7 +58,7 @@ public class LoginPage {
         loginButton.setStyle("-fx-background-color: #E2CE15; -fx-background-radius: 5");
         loginButton.setMinWidth(100);
         loginButton.setOnAction(e -> {
-            ExaminationPortal patientPortal = new ExaminationPortal(stage);
+            VitalsPanel patientPortal = new VitalsPanel(stage);
             patientPortal.show();
         });
 

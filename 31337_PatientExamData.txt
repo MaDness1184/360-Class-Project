@@ -1,0 +1,11 @@
+Patient Name: Nurse Test
+Patient ID: 31337
+Temperature: 69
+Weight: 420
+Blood Pressure: 69/420
+Heart Rate: 66
+Pain Level: 
+Immunizations: He's too based
+Allergens: N/A
+Current Medications: N/A
+Notes: Big Chungo
