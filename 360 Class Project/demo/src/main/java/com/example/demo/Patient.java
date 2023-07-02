@@ -66,8 +66,8 @@ public class Patient {
     public String getTemp() {
         return Temp;
     }
-/*
-    private void savePatientInfoToFile(VitalsPanel.Patient newPatient) {
+
+    public static void savePatientInfoToFile(Patient newPatient) {
         String patientFileName = newPatient.getID() + "_PatientExamData.txt";        // Create a patient file named xxxxx_PatientExamData.txt
 
         try (FileWriter fileWriter = new FileWriter(patientFileName)) {                    // Open try block and used for exception handling and ensures fileWriter resource is used properly
@@ -90,5 +90,4 @@ public class Patient {
             event.printStackTrace();        // prints the stack trace of the exception that occurred, providing information about where and how the exception was thrown
         }
     }
- */
 }

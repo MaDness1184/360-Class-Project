@@ -160,10 +160,8 @@ public class VitalsPanel {
 
 
             // Create patient information FILE
-            VitalsPanel.Patient newPatient = new VitalsPanel.Patient(pName, pTemp, pWeight, pBloodPressure, pHeartRate, pPain, pImmun, pAllergen, pMeds, pID, pNotes);
-
-            // Save patient information to a file
-            savePatientInfoToFile(newPatient);
+            Patient newPatient = new Patient(pName, pTemp, pWeight, pBloodPressure, pHeartRate, pPain, pImmun, pAllergen, pMeds, pID, pNotes);
+            Patient.savePatientInfoToFile(newPatient);
 
             // Display success message after save button is clicked
             Alert intakeAlert = new Alert(Alert.AlertType.INFORMATION);
