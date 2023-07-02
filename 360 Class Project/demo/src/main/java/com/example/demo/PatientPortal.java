@@ -61,6 +61,10 @@ public class PatientPortal
         logoutButton.setFont(new Font(20));
         VBox.setMargin(logoutButton, new Insets(5));
         leftVBox.getChildren().add(logoutButton);
+        logoutButton.setOnAction(event -> {
+            LoginPage loginPage = new LoginPage(stage);
+            loginPage.show();
+        });
 
         VBox bottomVBox = new VBox();
         bottomVBox.setAlignment(Pos.TOP_CENTER);
