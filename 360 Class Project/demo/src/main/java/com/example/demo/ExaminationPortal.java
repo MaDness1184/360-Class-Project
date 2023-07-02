@@ -18,9 +18,11 @@ import java.io.IOException;
 
 public class ExaminationPortal {
     private Stage stage;
+
     public ExaminationPortal(Stage stage) {
         this.stage = stage; // ExaminationPage constructor
     }
+
     public void show() {
         VBox layout = createLayout();
         Scene scene = new Scene(layout, 300, 200);
@@ -171,17 +173,18 @@ public class ExaminationPortal {
                 errorAlert.setTitle("Submit Error");                                           // Display string Error as alert title
                 errorAlert.setHeaderText("Required Information Missing");                      // Display alert header
                 errorAlert.setContentText("Please ensure all required text fields are filled. " +
-                                            "If no exam data is available, enter 'None'.");    // Display content alert
+                        "If no exam data is available, enter 'None'.");    // Display content alert
                 errorAlert.showAndWait();
-            }
-
-            else{
+            } else {
 
                 // Create patient information FILE
-                Patient newPatient = new Patient(IDText, VSText, VAText, CHText, RHText, NHText, MAText, SLNText, DiagText);
+                Patient temp = AccountManager.AccountSearch(Integer.parseInt(IDText));
+                PatientRecord newRecord = new PatientRecord(temp, IDText, VSText, VAText, CHText, RHText, NHText,
+                                            MAText, SLNText, DiagText);
 
+                temp.addRecord(newRecord);
                 // Save patient information to a file
-                savePatientInfoToFile(newPatient);
+                //savePatientInfoToFile(newPatient);
 
                 // Display success message after save button is clicked
                 Alert intakeAlert = new Alert(Alert.AlertType.INFORMATION);
@@ -232,17 +235,17 @@ public class ExaminationPortal {
                 errorAlert.setTitle("Send Error");                                             // Display string Error as alert title
                 errorAlert.setHeaderText("Required Information Missing");                      // Display  alert header
                 errorAlert.setContentText("Please ensure all required text fields are filled. " +
-                                          "If no data is available, enter 'None'.");           // Display content alert
+                        "If no data is available, enter 'None'.");           // Display content alert
                 errorAlert.showAndWait();
-            }
-
-            else{
+            } else {
 
                 // Create patient information FILE
-                Prescription newPrescription = new Prescription(PatientNameText,MedicationText, PharNameText, PharLocText, PharPhoneText, NoteText);
+                Prescription newPrescription = new Prescription(PatientNameText, MedicationText, PharNameText, PharLocText, PharPhoneText, NoteText);
 
+                //Patient temp = AccountManager.AccountSearch(IDText);
+                //temp.addPrescription(newPrescription);
                 // Save patient information to a file
-                savePrescriptionInfoToFile(newPrescription);
+                //savePrescriptionInfoToFile(newPrescription);
 
                 // Display success message after save button is clicked
                 Alert intakeAlert = new Alert(Alert.AlertType.INFORMATION);
@@ -277,16 +280,16 @@ public class ExaminationPortal {
 
 
         // Set left section
-        VBox PhysicalExamSection = new VBox(1,PhysicalExam, PatientID, IDTextField, VitalSigns, VSTextField, VisionAcuity, VATextField, CardiovascularHealth, CHTextField, RespiratoryHealth,
-                                        RHTextField, NeuroHealth, NHTextField, MusculoskeletalAssessment, MATextField, SkinAndLymphNodes, SLNTextField, Diagnosis, DiagTextField, submitButton);
+        VBox PhysicalExamSection = new VBox(1, PhysicalExam, PatientID, IDTextField, VitalSigns, VSTextField, VisionAcuity, VATextField, CardiovascularHealth, CHTextField, RespiratoryHealth,
+                RHTextField, NeuroHealth, NHTextField, MusculoskeletalAssessment, MATextField, SkinAndLymphNodes, SLNTextField, Diagnosis, DiagTextField, submitButton);
         PhysicalExamSection.setBackground(new Background(new BackgroundFill(Color.web("#FFFFFE"), CornerRadii.EMPTY, Insets.EMPTY))); // Setting background color
         PhysicalExamSection.setPadding(new Insets(20, 20, 20, 20));
         PhysicalExamSection.setAlignment(Pos.CENTER_LEFT);
 
 
         // Set right section
-        VBox PrescribeMedicationSection = new VBox(1,PrescribeMedication, PatientName, PNTextField, Medication, MedTextField, PharmacyName, PharNameTextField,
-                                                    PharmacyLocation, PharLocTextField, PharmacyPhone, PharPhoneTextField, Notes, NoteTextArea, SendPreButton);
+        VBox PrescribeMedicationSection = new VBox(1, PrescribeMedication, PatientName, PNTextField, Medication, MedTextField, PharmacyName, PharNameTextField,
+                PharmacyLocation, PharLocTextField, PharmacyPhone, PharPhoneTextField, Notes, NoteTextArea, SendPreButton);
         PrescribeMedicationSection.setBackground(new Background(new BackgroundFill(Color.web("#FFFFFE"), CornerRadii.EMPTY, Insets.EMPTY))); // Setting background color
         PrescribeMedicationSection.setPadding(new Insets(20, 20, 20, 20));
         PrescribeMedicationSection.setAlignment(Pos.CENTER_LEFT);
@@ -300,129 +303,13 @@ public class ExaminationPortal {
         HBox LogoutButtonLayout = new HBox();
         LogoutButtonLayout.getChildren().addAll(LogoutButton);
         LogoutButtonLayout.setAlignment(Pos.BOTTOM_RIGHT);
-        LogoutButtonLayout.setPadding(new Insets(0,10,10,0));
+        LogoutButtonLayout.setPadding(new Insets(0, 10, 10, 0));
 
 
         VBox layout = new VBox();
         layout.getChildren().addAll(titleLabel, Hlayout, LogoutButtonLayout);
 
-      return layout;
+        return layout;
 
-    }
-
-
-    // A private class to hold patient's information
-    private class Patient {
-        // private instance variables for storing the patient's info
-        private String PatientID, VitalSigns , VisionAcuity , CardiovascularHealth , RespiratoryHealth,
-                NeuroHealth , MusculoskeletalAssessment, SkinAndLymphNodes, Diagnosis;
-
-        // constructor of the Patient class takes the necessary information to create a Patient object and initializes the instance variables with the provided values
-        public Patient (String PatientID, String VitalSigns, String VisionAcuity, String CardiovascularHealth, String RespiratoryHealth, String NeuroHealth,
-                        String MusculoskeletalAssessment, String SkinAndLymphNodes, String Diagnosis) {
-            this.PatientID = PatientID;
-            this.VitalSigns =  VitalSigns;
-            this.VisionAcuity = VisionAcuity;
-            this.CardiovascularHealth = CardiovascularHealth;
-            this.RespiratoryHealth = RespiratoryHealth;
-            this.NeuroHealth = NeuroHealth;
-            this.MusculoskeletalAssessment = MusculoskeletalAssessment;
-            this.SkinAndLymphNodes = SkinAndLymphNodes;
-            this.Diagnosis = Diagnosis;
-
-        }
-
-        public String getPatientID() {                                                        // getter method that returns the patient's ID
-            return PatientID;
-        }
-        public String getVitalSigns() {                                                        // getter method that returns the patient's first name
-            return VitalSigns;
-        }
-        public String getVisionAcuity() {                                                         // getter method that returns the patient's last name
-            return VisionAcuity;
-        }
-        public String getCardiovascularHealth() {                                                            // getter method that returns the patient's email
-            return CardiovascularHealth;
-        }
-        public String getRespiratoryHealth() {                                                      // getter method that returns the patient's phone number
-            return RespiratoryHealth;
-        }
-        public String getNeuroHealth() {                                                    // getter method that returns the patient's health history
-            return NeuroHealth;
-        }
-        public String getMusculoskeletalAssessment() {                                                      // getter method that returns the patient's insurance ID
-            return MusculoskeletalAssessment;
-        }
-        public String getSkinAndLymphNodes() {                                                         // getter method that returns the patient's exam date
-            return SkinAndLymphNodes;
-        }
-        public String getDiagnosis() {                                                      // getter method that returns the patient's insurance ID
-            return Diagnosis;
-        }
-
-
-
-    }
-
-    // Class to hold Prescription info
-    private class Prescription {
-        // private instance variables for storing the patient's info
-        private String  PatientName, Medication, PharmacyName, PharmacyLocation, PharmacyPhone, Note;
-        // constructor of the Patient class takes the necessary information to create a Patient object and initializes the instance variables with the provided values
-        public Prescription (String PatientName, String Medication, String PharmacyName, String PharmacyLocation, String PharmacyPhone, String Note) {
-
-            this.PatientName = PatientName;
-            this.Medication = Medication;
-            this.PharmacyName = PharmacyName;
-            this.Note = Note;
-        }
-        public String getPatientName() {                                                      // getter method that returns the patient's insurance ID
-            return PatientName;
-        }
-        public String getMedication() {                                                      // getter method that returns the patient's insurance ID
-            return Medication;
-        }
-        public String getPharmacyName() { return PharmacyName; }
-        public String getPharmacyLocation() { return PharmacyLocation; }
-        public String getPharmacyPhone() { return PharmacyPhone; }
-        public String getNote() { return Note; }
-
-    }
-
-    private void savePatientInfoToFile(Patient newPatient) {
-        String patientFileName = newPatient.getPatientID() + "_PatientExamData.txt";        // Create a patient file named xxxxx_PatientExamData.txt
-
-        try (FileWriter fileWriter = new FileWriter(patientFileName)) {                    // Open try block and used for exception handling and ensures fileWriter resource is used properly
-
-            fileWriter.write("Patient ID: " + newPatient.getPatientID());
-            fileWriter.write("\nVital Signs: " + newPatient.getVitalSigns());
-            fileWriter.write("\nVision Acuity: " + newPatient.getVisionAcuity());
-            fileWriter.write("\nCardiovascular Health: " + newPatient.getCardiovascularHealth());
-            fileWriter.write("\nRespiratory Health,: " + newPatient.getRespiratoryHealth());
-            fileWriter.write("\nNeuro Health, : " + newPatient.getNeuroHealth());
-            fileWriter.write("\nMusculoskeletal Assessment: " + newPatient.getMusculoskeletalAssessment());
-            fileWriter.write("\nSkin And Lymph Nodes: " + newPatient.getSkinAndLymphNodes());
-            fileWriter.write("\nDiagnosis: " + newPatient.getDiagnosis());
-
-        } catch (IOException event) {       // This line starts a catch block and specifies that if an IOException occurs within the try block, the following code will handle the exception
-            event.printStackTrace();        // prints the stack trace of the exception that occurred, providing information about where and how the exception was thrown
-        }
-    }
-
-    private void savePrescriptionInfoToFile(Prescription newPrescription) {
-        String prescriptionFileName = newPrescription.getPatientName() + "_Medication.txt";      // Create a patient file named Name_Medication.txt
-
-        try (FileWriter fileWriter = new FileWriter(prescriptionFileName)) {                    // Open try block and used for exception handling and ensures fileWriter resource is used properly
-
-            fileWriter.write("Patient Name: " + newPrescription.getPatientName());
-            fileWriter.write("\nMedication: " + newPrescription.getMedication());
-            fileWriter.write("\nPharmacy: " + newPrescription.getPharmacyName());
-            fileWriter.write("\nPharmacy: " + newPrescription.getPharmacyLocation());
-            fileWriter.write("\nPharmacy: " + newPrescription.getPharmacyPhone());
-            fileWriter.write("\nNotes: " + newPrescription.getNote());
-
-        } catch (IOException event) {       // This line starts a catch block and specifies that if an IOException occurs within the try block, the following code will handle the exception
-            event.printStackTrace();        // prints the stack trace of the exception that occurred, providing information about where and how the exception was thrown
-        }
     }
 }

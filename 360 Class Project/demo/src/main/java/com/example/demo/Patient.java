@@ -2,13 +2,32 @@ package com.example.demo;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Patient extends Account
 {
     // private instance variables for storing the patient's info
     private String Name, Temp, Weight, BloodPressure, HeartRate,
             Pain, Immun, Allergen, Meds, Notes;
+    private List<PatientRecord> records = new ArrayList<>();
+    private List<Prescription> prescriptions = new ArrayList<>();
     private int ID;
+
+    // constructor of the Patient class takes the necessary information to create a Patient object and initializes the instance variables with the provided values
+    public Patient(String pName, String pTemp, String pWeight, String pBloodPressure, String pHeartRate, String pPain, String pImmun, String pAllergen, String pMeds, String pID, String pNotes) {
+        this.Name = pName;
+        this.Temp = pTemp;
+        this.Weight = pWeight;
+        this.BloodPressure = pBloodPressure;
+        this.HeartRate = pHeartRate;
+        this.Pain = pPain;
+        this.Immun = pImmun;
+        this.Allergen = pAllergen;
+        this.Meds = pMeds;
+        this.ID = Integer.parseInt(pID);
+        this.Notes = pNotes;
+    }
 
     public void setName(String name) {
         Name = name;
@@ -55,21 +74,6 @@ public class Patient extends Account
         Notes = notes;
     }
 
-    // constructor of the Patient class takes the necessary information to create a Patient object and initializes the instance variables with the provided values
-    public Patient(String pName, String pTemp, String pWeight, String pBloodPressure, String pHeartRate, String pPain, String pImmun, String pAllergen, String pMeds, String pID, String pNotes) {
-        this.Name = pName;
-        this.Temp = pTemp;
-        this.Weight = pWeight;
-        this.BloodPressure = pBloodPressure;
-        this.HeartRate = pHeartRate;
-        this.Pain = pPain;
-        this.Immun = pImmun;
-        this.Allergen = pAllergen;
-        this.Meds = pMeds;
-        this.ID = Integer.parseInt(pID);
-        this.Notes = pNotes;
-    }
-
     public String getName() {
         return Name;
     }
@@ -114,28 +118,13 @@ public class Patient extends Account
         return Temp;
     }
 
-    private class Prescription {
-        // private instance variables for storing the patient's info
-        private String  PatientName, Medication, PharmacyName, PharmacyLocation, PharmacyPhone, Note;
-        // constructor of the Patient class takes the necessary information to create a Patient object and initializes the instance variables with the provided values
-        public Prescription (String PatientName, String Medication, String PharmacyName, String PharmacyLocation, String PharmacyPhone, String Note) {
-
-            this.PatientName = PatientName;
-            this.Medication = Medication;
-            this.PharmacyName = PharmacyName;
-            this.Note = Note;
-        }
-        public String getPatientName() {                                                      // getter method that returns the patient's insurance ID
-            return PatientName;
-        }
-        public String getMedication() {                                                      // getter method that returns the patient's insurance ID
-            return Medication;
-        }
-        public String getPharmacyName() { return PharmacyName; }
-        public String getPharmacyLocation() { return PharmacyLocation; }
-        public String getPharmacyPhone() { return PharmacyPhone; }
-        public String getNote() { return Note; }
-
+    public void addRecord(PatientRecord record)
+    {
+        records.add(record);
+    }
+    public void addPrescription(Prescription prescription)
+    {
+        prescriptions.add(prescription);
     }
 /*
     public static void savePatientInfoToFile(Patient newPatient) {
