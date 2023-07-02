@@ -154,14 +154,23 @@ public class VitalsPanel {
             String pImmun= immunizationText.getText();
             String pAllergen= allergenText.getText();
             String pMeds= medicationText.getText();
-            String pID= patientIDText.getText();
+            String pID = patientIDText.getText();
             String pNotes = notesText.getText();
 
-
-
             // Create patient information FILE
-            Patient newPatient = new Patient(pName, pTemp, pWeight, pBloodPressure, pHeartRate, pPain, pImmun, pAllergen, pMeds, pID, pNotes);
-            Patient.savePatientInfoToFile(newPatient);
+            Patient temp = AccountManager.AccountSearch(Integer.parseInt(pID));
+            temp.firstName = pName;
+            temp.setTemp(pTemp);
+            temp.setWeight(pWeight);
+            temp.setBloodPressure(pBloodPressure);
+            temp.setHeartRate(pHeartRate);
+            temp.setPain(pPain);
+            temp.setImmun(pImmun);
+            temp.setAllergen(pAllergen);
+            temp.setMeds(pMeds);
+            temp.setNotes(pNotes);
+
+            //Patient.savePatientInfoToFile(newPatient);
 
             // Display success message after save button is clicked
             Alert intakeAlert = new Alert(Alert.AlertType.INFORMATION);

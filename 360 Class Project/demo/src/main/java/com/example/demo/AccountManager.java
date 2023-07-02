@@ -6,8 +6,6 @@ public class AccountManager {
     public static int count = 0;
     public static Account activeAccount = null;
     // PatientRecord newRecord = null;
-
-
     public static Account AccountSearch(String userName)    // Search for an account using an id
     {
         for (Account account : accounts) {      // for each loop to loop through list
@@ -16,11 +14,11 @@ public class AccountManager {
         }
         return null;                      // return NULL if the account was not found
     }
-    public static Account AccountSearch(int ID)    // Search for an account using an id
+    public static Patient AccountSearch(int ID)    // Search for an account using an id
     {
         for (Account account : accounts) {      // for each loop to loop through list
             if (account.getID() == ID)
-                return account;                 // return account if account found
+                return (Patient) account;                 // return account if account found
         }
         return null;                      // return NULL if the account was not found
     }

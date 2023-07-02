@@ -3,11 +3,57 @@ package com.example.demo;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Patient {
+public class Patient extends Account
+{
     // private instance variables for storing the patient's info
     private String Name, Temp, Weight, BloodPressure, HeartRate,
             Pain, Immun, Allergen, Meds, Notes;
     private int ID;
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public void setTemp(String temp) {
+        Temp = temp;
+    }
+
+    public void setWeight(String weight) {
+        Weight = weight;
+    }
+
+    public void setBloodPressure(String bloodPressure)
+    {
+        BloodPressure = bloodPressure;
+    }
+
+    public void setHeartRate(String heartRate)
+    {
+        HeartRate = heartRate;
+    }
+
+    public void setPain(String pain) {
+        Pain = pain;
+    }
+
+    public void setImmun(String immun) {
+        Immun = immun;
+    }
+
+    public void setAllergen(String allergen)
+    {
+        Allergen = allergen;
+    }
+
+    public void setMeds(String meds)
+    {
+        Meds = meds;
+    }
+
+    public void setNotes(String notes)
+    {
+        Notes = notes;
+    }
 
     // constructor of the Patient class takes the necessary information to create a Patient object and initializes the instance variables with the provided values
     public Patient(String pName, String pTemp, String pWeight, String pBloodPressure, String pHeartRate, String pPain, String pImmun, String pAllergen, String pMeds, String pID, String pNotes) {
@@ -68,6 +114,30 @@ public class Patient {
         return Temp;
     }
 
+    private class Prescription {
+        // private instance variables for storing the patient's info
+        private String  PatientName, Medication, PharmacyName, PharmacyLocation, PharmacyPhone, Note;
+        // constructor of the Patient class takes the necessary information to create a Patient object and initializes the instance variables with the provided values
+        public Prescription (String PatientName, String Medication, String PharmacyName, String PharmacyLocation, String PharmacyPhone, String Note) {
+
+            this.PatientName = PatientName;
+            this.Medication = Medication;
+            this.PharmacyName = PharmacyName;
+            this.Note = Note;
+        }
+        public String getPatientName() {                                                      // getter method that returns the patient's insurance ID
+            return PatientName;
+        }
+        public String getMedication() {                                                      // getter method that returns the patient's insurance ID
+            return Medication;
+        }
+        public String getPharmacyName() { return PharmacyName; }
+        public String getPharmacyLocation() { return PharmacyLocation; }
+        public String getPharmacyPhone() { return PharmacyPhone; }
+        public String getNote() { return Note; }
+
+    }
+/*
     public static void savePatientInfoToFile(Patient newPatient) {
         String patientFileName = newPatient.getID() + "_PatientExamData.txt";        // Create a patient file named xxxxx_PatientExamData.txt
 
@@ -91,4 +161,22 @@ public class Patient {
             event.printStackTrace();        // prints the stack trace of the exception that occurred, providing information about where and how the exception was thrown
         }
     }
+
+    private void savePrescriptionInfoToFile(ExaminationPortal.Prescription newPrescription) {
+        String prescriptionFileName = newPrescription.getPatientName() + "_Medication.txt";      // Create a patient file named Name_Medication.txt
+
+        try (FileWriter fileWriter = new FileWriter(prescriptionFileName)) {                    // Open try block and used for exception handling and ensures fileWriter resource is used properly
+
+            fileWriter.write("Patient Name: " + newPrescription.getPatientName());
+            fileWriter.write("\nMedication: " + newPrescription.getMedication());
+            fileWriter.write("\nPharmacy: " + newPrescription.getPharmacyName());
+            fileWriter.write("\nPharmacy: " + newPrescription.getPharmacyLocation());
+            fileWriter.write("\nPharmacy: " + newPrescription.getPharmacyPhone());
+            fileWriter.write("\nNotes: " + newPrescription.getNote());
+
+        } catch (IOException event) {       // This line starts a catch block and specifies that if an IOException occurs within the try block, the following code will handle the exception
+            event.printStackTrace();        // prints the stack trace of the exception that occurred, providing information about where and how the exception was thrown
+        }
+    }
+    */
 }
