@@ -82,6 +82,8 @@ public class LoginPage {
 
                 System.out.println(account);
                 System.out.println("Successful login!");
+                PatientPortal patientPortal = new PatientPortal(stage);
+                patientPortal.show();
             }
             else {
                 // If no, show error message
