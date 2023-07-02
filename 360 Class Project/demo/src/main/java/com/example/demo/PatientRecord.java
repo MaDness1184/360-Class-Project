@@ -12,11 +12,14 @@ public class PatientRecord {
     private String musculoskeletalAssessment;
     private String skinAndLymphNodes;
     private String diagnosis;
+    private Account account;   // Reference to the associated account
 
 
-    public PatientRecord (String patientID, String vitalSigns, String visionAcuity, String cardiovascularHealth,
+
+    public PatientRecord (Account account, String patientID, String vitalSigns, String visionAcuity, String cardiovascularHealth,
                          String respiratoryHealth, String neuroHealth, String musculoskeletalAssessment,
                          String skinAndLymphNodes, String diagnosis) {
+        this.account = account;
         this.date = LocalDate.now();
         this.patientID = patientID;
         this.vitalSigns = vitalSigns;
