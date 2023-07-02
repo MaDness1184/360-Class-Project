@@ -24,8 +24,7 @@ public class PatientPortal
         stage.show();
     }
 
-    private Scene createScene()
-    {
+    private Scene createScene() {
         BorderPane root = new BorderPane();
         Account activeAccount = AccountManager.activeAccount;
 
