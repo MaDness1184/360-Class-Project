@@ -5,13 +5,22 @@ public class AccountManager {
     public static Account activeAccount = null;
     // PatientRecord newRecord = null;
 
+
+    public static Account AccountSearch(String userName)    // Search for an account using an id
+    {
+        for (Account account : accounts) {      // for each loop to loop through list
+            if (account.getUser() == userName)
+                return account;                 // return account if account found
+        }
+        return null;                      // return NULL if the account was not found
+    }
     public static Account AccountSearch(int ID)    // Search for an account using an id
     {
         for (Account account : accounts) {      // for each loop to loop through list
             if (account.getID() == ID)
                 return account;                 // return account if account found
         }
-        return null;                        // return NULL if the account was not found
+        return null;                      // return NULL if the account was not found
     }
 
     public static void SetActiveAccount(Account account)

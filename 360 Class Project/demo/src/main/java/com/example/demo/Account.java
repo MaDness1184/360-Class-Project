@@ -58,6 +58,11 @@ public class Account {
         return userId;
     }
 
+    public String getUser()
+    {
+        return username;
+    }
+
     // need message stuff to be made first
     public void addMessage() {
         //todo
