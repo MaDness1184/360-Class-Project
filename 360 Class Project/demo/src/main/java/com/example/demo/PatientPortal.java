@@ -71,7 +71,7 @@ public class PatientPortal
         Label recentVisitLabel = new Label("Recent Visits");
         recentVisitLabel.setTextFill(Color.web("#9741a5"));
         recentVisitLabel.setUnderline(true);
-        recentVisitLabel.setFont(new Font(25));
+        recentVisitLabel.setFont(new Font(20));
         bottomVBox.getChildren().add(recentVisitLabel);
 
         ListView<String> recentVisitList = new ListView<>();
@@ -85,21 +85,21 @@ public class PatientPortal
         centerBorderPane.setPrefWidth(600);
         root.setCenter(centerBorderPane);
 
-        Label welcomeLabel = new Label("Welcome Back, <Insert Name>");
-        welcomeLabel.setTextFill(Color.web("#9741a5"));
-        welcomeLabel.setFont(new Font(35));
-        centerBorderPane.setTop(welcomeLabel);
-
         VBox centerVBox = new VBox();
         centerVBox.setAlignment(Pos.TOP_CENTER);
         centerVBox.setPrefHeight(200);
         centerVBox.setPrefWidth(100);
         centerBorderPane.setCenter(centerVBox);
 
+        Label welcomeLabel = new Label("Welcome Back, <Insert Name>");
+        welcomeLabel.setTextFill(Color.web("#9741a5"));
+        welcomeLabel.setFont(new Font(30));
+        centerVBox.getChildren().add(welcomeLabel);
+
         Label recentMessagesLabel = new Label("Recent Messages");
         recentMessagesLabel.setTextFill(Color.web("#9741a5"));
         recentMessagesLabel.setUnderline(true);
-        recentMessagesLabel.setFont(new Font(25));
+        recentMessagesLabel.setFont(new Font(20));
         centerVBox.getChildren().add(recentMessagesLabel);
 
         ListView<String> messagesList = new ListView<>();
@@ -108,7 +108,7 @@ public class PatientPortal
         messagesList.setStyle("-fx-background-color: #D9D9D9; -fx-background-radius: 10;");
         centerVBox.getChildren().add(messagesList);
 
-        Button messageButton = new Button("Messages");
+        Button messageButton = new Button("Message Portal");
         messageButton.setStyle("-fx-background-color: #E2CE15;");
         messageButton.setFont(new Font(20));
         VBox.setMargin(messageButton, new Insets(5));
