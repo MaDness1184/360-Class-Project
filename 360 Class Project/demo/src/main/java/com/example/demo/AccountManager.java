@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class AccountManager {
     private static List<Account> accounts = new ArrayList<>();
-    public static int count = 0;
+    public static int count = 9999;
     public static Account activeAccount = null;
     // PatientRecord newRecord = null;
     public static Account AccountSearch(String userName)    // Search for an account using an id
