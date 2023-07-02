@@ -52,6 +52,8 @@ public class Account {
         return temp;
     }
 
+    public String getFirstName() {return firstName;}
+
     public int getID()
     {
         return userId;

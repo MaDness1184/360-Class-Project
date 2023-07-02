@@ -34,9 +34,10 @@ public class CreateAccountPage
         VBox infoLayout = new VBox(10);
         StackPane finalLayout = new StackPane();
 
+
         // Temporary back button that takes you to Login Page
         Button back = new Button("X");
-        back.setStyle("-fx-background-color: #eaeaea; -fx-background-radius: 10; -fx-font-size: 20; -fx-alignment: center;");
+        back.setStyle("-fx-background-color: #eaeaea; -fx-background-radius: 5; -fx-font-size: 10; -fx-alignment: center;");
         back.setOnAction(e -> {
             LoginPage loginPage = new LoginPage(stage);
             loginPage.show();
@@ -75,7 +76,8 @@ public class CreateAccountPage
         dateLabel.setTextFill(Color.web("#9741A5"));
 
         DatePicker datePicker = new DatePicker();
-        datePicker.setStyle("-fx-control-inner-background: #ECECEC; -fx-max-width: 250; -fx-background-color: #ECECEC");
+        datePicker.setStyle("-fx-control-inner-background: #ECECEC; -fx-max-width: 250; -fx-background-color: #ECECEC; -fx-border-radius: 10");
+        datePicker.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(100.0), Insets.EMPTY)));
 
         //Label and text field for phone number.
         Label phoneLabel = new Label("Phone Number:");

@@ -27,6 +27,7 @@ public class PatientPortal
     private Scene createScene()
     {
         BorderPane root = new BorderPane();
+        Account activeAccount = AccountManager.activeAccount;
 
         VBox leftVBox = new VBox();
         leftVBox.setAlignment(Pos.TOP_CENTER);
@@ -43,7 +44,7 @@ public class PatientPortal
         logo.setImage(image1);
         leftVBox.getChildren().add(logo);
 
-        Label patientIDLabel = new Label("Patient ID: #####");
+        Label patientIDLabel = new Label("Patient ID: " + activeAccount.getID());
         patientIDLabel.setTextFill(Color.web("#9741a5"));
         patientIDLabel.setUnderline(true);
         patientIDLabel.setFont(new Font(18));
@@ -91,7 +92,7 @@ public class PatientPortal
         centerVBox.setPrefWidth(100);
         centerBorderPane.setCenter(centerVBox);
 
-        Label welcomeLabel = new Label("Welcome Back, <Insert Name>");
+        Label welcomeLabel = new Label("Welcome Back, " + activeAccount.getFirstName());
         welcomeLabel.setTextFill(Color.web("#9741a5"));
         welcomeLabel.setFont(new Font(30));
         centerVBox.getChildren().add(welcomeLabel);
