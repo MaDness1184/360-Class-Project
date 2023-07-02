@@ -1,7 +1,9 @@
 package com.example.demo;
+import java.util.ArrayList;
 import java.util.List;
 public class AccountManager {
-    private static List<Account> accounts;
+    private static List<Account> accounts = new ArrayList<>();
+    public static int count = 0;
     public static Account activeAccount = null;
     // PatientRecord newRecord = null;
 
@@ -9,7 +11,7 @@ public class AccountManager {
     public static Account AccountSearch(String userName)    // Search for an account using an id
     {
         for (Account account : accounts) {      // for each loop to loop through list
-            if (account.getUser() == userName)
+            if (account.getUsername().equals(userName))
                 return account;                 // return account if account found
         }
         return null;                      // return NULL if the account was not found

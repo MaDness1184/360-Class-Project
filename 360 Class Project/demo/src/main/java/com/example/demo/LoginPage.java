@@ -58,8 +58,40 @@ public class LoginPage {
         loginButton.setStyle("-fx-background-color: #E2CE15; -fx-background-radius: 5");
         loginButton.setMinWidth(100);
         loginButton.setOnAction(e -> {
-            VitalsPanel patientPortal = new VitalsPanel(stage);
-            patientPortal.show();
+            String enteredUsername = usernameField.getText();
+            String enteredPassword = passwordField.getText();
+
+            Account account = AccountManager.AccountSearch(enteredUsername);
+
+            if (account != null && account.getPassword().equals(passwordField.getText()))
+            {
+                AccountManager.activeAccount = account;
+
+                if (account.isDoctor)
+                {
+                    // PUSH TO DOCTOR'S PANEL
+                }
+
+                if (account.isNurse)
+                {
+                    // PUSH TO NURSE'S PANEL
+                }
+
+
+
+
+                System.out.println(account);
+                System.out.println("Successful login!");
+            }
+            else {
+                // If no, show error message
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Login Error");
+                alert.setHeaderText("Invalid Credentials");
+                alert.setContentText("The entered username or password is incorrect. Please try again.");
+                alert.showAndWait();
+            }
+
         });
 
         // Create account button that takes you to create account page

@@ -10,6 +10,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+
+import java.time.LocalDate;
+
 public class CreateAccountPage
 {
     private Stage stage;
@@ -94,7 +97,7 @@ public class CreateAccountPage
         Label passwordLabel = new Label("Password:");
         passwordLabel.setTextFill(Color.web("#9741A5"));
 
-        TextField passwordField = new TextField();
+        PasswordField passwordField = new PasswordField();
         passwordField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
         passwordField.setMaxWidth(250);
 
@@ -103,8 +106,33 @@ public class CreateAccountPage
         createAccountButton.setStyle("-fx-background-color: #E2CE15; -fx-background-radius: 5");
         createAccountButton.setMinWidth(100);
         createAccountButton.setOnAction(e -> {
-            LoginPage loginPage = new LoginPage(stage);
-            loginPage.show();
+            String firstName = firstnameField.getText();
+            String lastName = lastnameField.getText();
+            LocalDate dateOfBirth = datePicker.getValue();
+            String phoneNumber = phoneField.getText();
+            String username = usernameField.getText();
+            String password = passwordField.getText();
+
+            if(firstName.isEmpty() || lastName.isEmpty() || dateOfBirth == null || phoneNumber.isEmpty() || username.isEmpty() || password.isEmpty()) {
+                // Handle empty fields
+                Alert noFields = new Alert(Alert.AlertType.ERROR);
+                noFields.setTitle("Error");                                           // Display string Error as alert title
+                noFields.setHeaderText("Required Information Missing");                      // Display alert header
+                noFields.showAndWait();
+            }
+            else
+            {
+                Account newAccount = new Account(firstName, lastName, phoneNumber, "", username, password);
+
+                AccountManager accountManager = new AccountManager();
+                accountManager.AddAccount(newAccount);
+
+                System.out.println(newAccount);
+                System.out.println(newAccount.getID());
+
+                LoginPage loginPage = new LoginPage(stage);
+                loginPage.show();
+            }
         });
 
         //Logo Image
@@ -125,6 +153,7 @@ public class CreateAccountPage
         StackPane.setAlignment(leftLayout, Pos.CENTER);
         StackPane.setAlignment(back, Pos.TOP_RIGHT);
         StackPane.setAlignment(imageView, Pos.CENTER_RIGHT);
+        finalLayout.setBackground(new Background(new BackgroundFill(Color.web("#FFFFFE"), CornerRadii.EMPTY, Insets.EMPTY)));
         finalLayout.setPadding(new Insets(20));
         Scene scene = new Scene(finalLayout, 300, 200);
         return scene;

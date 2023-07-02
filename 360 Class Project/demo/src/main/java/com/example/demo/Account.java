@@ -6,7 +6,7 @@ import java.util.Random;
 public class Account {
     protected String firstName;
     protected String lastName;
-    protected int phoneNum;
+    protected String phoneNum;
     protected String email;
     protected int userId;
     protected String username;
@@ -24,7 +24,7 @@ public class Account {
     public Account () {
         this.firstName = "John";
         this.lastName = "Doe";
-        this.phoneNum = 0000000000;
+        this.phoneNum = "0000000000";
         this.email = "N/A";
         this.userId = idGen();
         this.username = "N/A";
@@ -34,7 +34,7 @@ public class Account {
     }
 
     // the correct constructor to be used by reception form
-    public Account(String firstName, String lastName,int phoneNum, String email, String username, String password) {
+    public Account(String firstName, String lastName, String phoneNum, String email, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNum = phoneNum;
@@ -48,8 +48,7 @@ public class Account {
 
     // uses count to generate sequential user IDs
     private int idGen() {
-        int temp = count++;
-        count++;
+        int temp = ++AccountManager.count;
         return temp;
     }
 
@@ -58,9 +57,14 @@ public class Account {
         return userId;
     }
 
-    public String getUser()
+    public String getUsername()
     {
         return username;
+    }
+
+    public String getPassword()
+    {
+        return password;
     }
 
     // need message stuff to be made first
@@ -75,11 +79,8 @@ public class Account {
     // checks if account is staff or not
     public boolean isStaff () {
 
-        if(this.isNurse == true || this.isDoctor == true) {
-            return true;
-        }
+        return (this.isNurse == true || this.isDoctor == true);
 
-        return false;
     }
 }
 
