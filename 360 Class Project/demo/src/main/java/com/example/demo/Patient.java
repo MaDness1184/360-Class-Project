@@ -6,7 +6,8 @@ import java.io.IOException;
 public class Patient {
     // private instance variables for storing the patient's info
     private String Name, Temp, Weight, BloodPressure, HeartRate,
-            Pain, Immun, Allergen, Meds, ID, Notes;
+            Pain, Immun, Allergen, Meds, Notes;
+    private int ID;
 
     // constructor of the Patient class takes the necessary information to create a Patient object and initializes the instance variables with the provided values
     public Patient(String pName, String pTemp, String pWeight, String pBloodPressure, String pHeartRate, String pPain, String pImmun, String pAllergen, String pMeds, String pID, String pNotes) {
@@ -19,7 +20,7 @@ public class Patient {
         this.Immun = pImmun;
         this.Allergen = pAllergen;
         this.Meds = pMeds;
-        this.ID = pID;
+        this.ID = Integer.parseInt(pID);
         this.Notes = pNotes;
     }
 
@@ -55,7 +56,7 @@ public class Patient {
         return Meds;
     }
 
-    public String getID() {
+    public int getID() {
         return ID;
     }
 
