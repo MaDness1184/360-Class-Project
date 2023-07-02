@@ -218,6 +218,7 @@ public class ExaminationPortal {
         SendPreButton.setOnAction(e -> {
 
             // Retrieves the text entered
+            String IDText = IDTextField.getText();
             String PatientNameText = PNTextField.getText();
             String MedicationText = MedTextField.getText();
             String PharNameText = PharNameTextField.getText();
@@ -242,8 +243,8 @@ public class ExaminationPortal {
                 // Create patient information FILE
                 Prescription newPrescription = new Prescription(PatientNameText, MedicationText, PharNameText, PharLocText, PharPhoneText, NoteText);
 
-                //Patient temp = AccountManager.AccountSearch(IDText);
-                //temp.addPrescription(newPrescription);
+                Patient temp = AccountManager.AccountSearch(Integer.parseInt(IDText));
+                temp.addPrescription(newPrescription);
                 // Save patient information to a file
                 //savePrescriptionInfoToFile(newPrescription);
 
@@ -255,13 +256,13 @@ public class ExaminationPortal {
                 intakeAlert.showAndWait();
 
                 // Clear the input fields after submit successfully
+                IDTextField.clear();
                 PNTextField.clear();
                 MedTextField.clear();
                 PharNameTextField.clear();
                 NoteTextArea.clear();
                 PharLocTextField.clear();
                 PharPhoneTextField.clear();
-
             }
 
         });
