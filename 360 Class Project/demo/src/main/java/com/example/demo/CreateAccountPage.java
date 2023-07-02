@@ -12,7 +12,6 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 public class CreateAccountPage
 {
-
     private Stage stage;
 
     public CreateAccountPage(Stage stage)
