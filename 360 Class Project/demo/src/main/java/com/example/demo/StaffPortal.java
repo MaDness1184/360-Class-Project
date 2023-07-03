@@ -12,6 +12,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.scene.control.TextArea;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StaffPortal {
     private Stage stage;
@@ -25,7 +32,7 @@ public class StaffPortal {
         stage.show();
     }
 
-    private Scene createScene(){
+    private Scene createScene() {
         BorderPane root = new BorderPane();
 
         BorderPane centerBorderPane = new BorderPane();
@@ -128,22 +135,49 @@ public class StaffPortal {
         VBox.setMargin(recordID, new Insets(5));
         leftVBox.getChildren().add(recordID);
 
-        Button viewButton = new Button("  View  ");
-        viewButton.setStyle("-fx-background-color: #E2CE15;");
-        viewButton.setFont(new Font(15));
-        leftVBox.getChildren().add(viewButton);
-
         Label patientRecordLabel = new Label("Patient Records:");
         patientRecordLabel.setTextFill(Color.web("#9741a5"));
         patientRecordLabel.setFont(new Font(20));
         leftVBox.getChildren().add(patientRecordLabel);
 
-        TextField recordView = new TextField();
+        TextArea recordView = new TextArea();
         recordView.setPrefHeight(420);
         recordView.setPrefWidth(230);
         recordView.setStyle("-fx-background-color: #ECECEC; -fx-background-radius: 10;");
+        recordView.setWrapText(true); // Enable text wrapping
         VBox.setMargin(recordView, new Insets(5));
         leftVBox.getChildren().add(recordView);
+
+
+        Button viewButton = new Button("  View  ");
+        viewButton.setStyle("-fx-background-color: #E2CE15;");
+        viewButton.setFont(new Font(15));
+        leftVBox.getChildren().add(viewButton);
+        viewButton.setOnAction(e -> {
+            String recordIDText = recordID.getText();
+            String examinationFileName = recordIDText+ "_PatientExamData.txt";
+            String prescriptionFileName = recordIDText + "_Medication.txt";
+
+            StringBuilder recordBuilder = new StringBuilder();
+
+            // Read patient examination data
+            try (BufferedReader reader = new BufferedReader(new FileReader(examinationFileName))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    recordBuilder.append(line).append("\n");
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+            // Set the text of recordView with the combined data
+            recordView.setText(recordBuilder.toString());
+        });
+
+
+
+
+
 
         Scene scene = new Scene(root, 800, 600);
         return scene;

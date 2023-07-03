@@ -177,14 +177,13 @@ public class ExaminationPortal {
                 errorAlert.showAndWait();
             } else {
 
-                // Create patient information FILE
-                Patient temp = AccountManager.AccountSearch(Integer.parseInt(IDText));
-                PatientRecord newRecord = new PatientRecord(temp, IDText, VSText, VAText, CHText, RHText, NHText,
-                                            MAText, SLNText, DiagText);
 
-                temp.addRecord(newRecord);
-                // Save patient information to a file
-                //savePatientInfoToFile(newPatient);
+                Patient newPatientRecord = new Patient(IDText, VSText, VAText, CHText, RHText, NHText, MAText, SLNText, DiagText);
+
+                //savePrescriptionInfoToFile(newPrescription);
+                savePatientInfoToFile(newPatientRecord);
+
+
 
                 // Display success message after save button is clicked
                 Alert intakeAlert = new Alert(Alert.AlertType.INFORMATION);
@@ -243,10 +242,8 @@ public class ExaminationPortal {
                 // Create patient information FILE
                 Prescription newPrescription = new Prescription(PatientNameText, MedicationText, PharNameText, PharLocText, PharPhoneText, NoteText);
 
-                Patient temp = AccountManager.AccountSearch(Integer.parseInt(IDText));
-                temp.addPrescription(newPrescription);
-                // Save patient information to a file
                 //savePrescriptionInfoToFile(newPrescription);
+                savePrescriptionInfoToFile(newPrescription);
 
                 // Display success message after save button is clicked
                 Alert intakeAlert = new Alert(Alert.AlertType.INFORMATION);
@@ -312,5 +309,132 @@ public class ExaminationPortal {
 
         return layout;
 
+
     }
+
+    // A private class to hold patient's information
+    private class Patient {
+        // private instance variables for storing the patient's info
+        private String PatientID, VitalSigns , VisionAcuity , CardiovascularHealth , RespiratoryHealth,
+                NeuroHealth , MusculoskeletalAssessment, SkinAndLymphNodes, Diagnosis;
+
+        // constructor of the Patient class takes the necessary information to create a Patient object and initializes the instance variables with the provided values
+        public Patient (String PatientID, String VitalSigns, String VisionAcuity, String CardiovascularHealth, String RespiratoryHealth, String NeuroHealth,
+                        String MusculoskeletalAssessment, String SkinAndLymphNodes, String Diagnosis) {
+            this.PatientID = PatientID;
+            this.VitalSigns =  VitalSigns;
+            this.VisionAcuity = VisionAcuity;
+            this.CardiovascularHealth = CardiovascularHealth;
+            this.RespiratoryHealth = RespiratoryHealth;
+            this.NeuroHealth = NeuroHealth;
+            this.MusculoskeletalAssessment = MusculoskeletalAssessment;
+            this.SkinAndLymphNodes = SkinAndLymphNodes;
+            this.Diagnosis = Diagnosis;
+
+        }
+
+        public String getPatientID() {                                                        // getter method that returns the patient's ID
+            return PatientID;
+        }
+        public String getVitalSigns() {                                                        // getter method that returns the patient's first name
+            return VitalSigns;
+        }
+        public String getVisionAcuity() {                                                         // getter method that returns the patient's last name
+            return VisionAcuity;
+        }
+        public String getCardiovascularHealth() {                                                            // getter method that returns the patient's email
+            return CardiovascularHealth;
+        }
+        public String getRespiratoryHealth() {                                                      // getter method that returns the patient's phone number
+            return RespiratoryHealth;
+        }
+        public String getNeuroHealth() {                                                    // getter method that returns the patient's health history
+            return NeuroHealth;
+        }
+        public String getMusculoskeletalAssessment() {                                                      // getter method that returns the patient's insurance ID
+            return MusculoskeletalAssessment;
+        }
+        public String getSkinAndLymphNodes() {                                                         // getter method that returns the patient's exam date
+            return SkinAndLymphNodes;
+        }
+        public String getDiagnosis() {                                                      // getter method that returns the patient's insurance ID
+            return Diagnosis;
+        }
+
+
+
+    }
+
+    // Class to hold Prescription info
+    private class Prescription {
+        // private instance variables for storing the patient's info
+        private String  PatientName, Medication, PharmacyName, PharmacyLocation, PharmacyPhoneNumber, Note;
+        // constructor of the Patient class takes the necessary information to create a Patient object and initializes the instance variables with the provided values
+        public Prescription (String PatientName, String Medication, String PharmacyName, String PharmacyLocation, String PharmacyPhoneNumber, String Note) {
+
+            this.PatientName = PatientName;
+            this.Medication = Medication;
+            this.PharmacyName = PharmacyName;
+            this.PharmacyLocation = PharmacyLocation;
+            this.PharmacyPhoneNumber = PharmacyPhoneNumber;
+            this.Note = Note;
+        }
+        public String getPatientName() {                                                      // getter method that returns the patient's insurance ID
+            return PatientName;
+        }
+        public String getMedication() {                                                      // getter method that returns the patient's insurance ID
+            return Medication;
+        }
+        public String getPharmacyName() {                                                      // getter method that returns the patient's insurance ID
+            return PharmacyName;
+        }
+        public String getPharmacyLocation() {                                                      // getter method that returns the patient's insurance ID
+            return PharmacyLocation;
+        }
+        public String getPharmacyPhoneNumber() {                                                      // getter method that returns the patient's insurance ID
+            return PharmacyPhoneNumber;
+        }
+        public String getNote() {                                                      // getter method that returns the patient's insurance ID
+            return Note;
+        }
+
+    }
+
+    private void savePatientInfoToFile(Patient newPatient) {
+        String patientFileName = newPatient.getPatientID() + "_PatientExamData.txt";        // Create a patient file named xxxxx_PatientExamData.txt
+
+        try (FileWriter fileWriter = new FileWriter(patientFileName)) {                    // Open try block and used for exception handling and ensures fileWriter resource is used properly
+
+            fileWriter.write("Patient ID: " + newPatient.getPatientID());
+            fileWriter.write("\nVital Signs: " + newPatient.getVitalSigns());
+            fileWriter.write("\nVision Acuity: " + newPatient.getVisionAcuity());
+            fileWriter.write("\nCardiovascular Health: " + newPatient.getCardiovascularHealth());
+            fileWriter.write("\nRespiratory Health,: " + newPatient.getRespiratoryHealth());
+            fileWriter.write("\nNeuro Health, : " + newPatient.getNeuroHealth());
+            fileWriter.write("\nMusculoskeletal Assessment: " + newPatient.getMusculoskeletalAssessment());
+            fileWriter.write("\nSkin And Lymph Nodes: " + newPatient.getSkinAndLymphNodes());
+            fileWriter.write("\nDiagnosis: " + newPatient.getDiagnosis());
+
+        } catch (IOException event) {       // This line starts a catch block and specifies that if an IOException occurs within the try block, the following code will handle the exception
+            event.printStackTrace();        // prints the stack trace of the exception that occurred, providing information about where and how the exception was thrown
+        }
+    }
+
+    private void savePrescriptionInfoToFile(Prescription newPrescription) {
+        String prescriptionFileName = newPrescription.getPatientName() + "_Medication.txt";      // Create a patient file named Name_Medication.txt
+
+        try (FileWriter fileWriter = new FileWriter(prescriptionFileName)) {                    // Open try block and used for exception handling and ensures fileWriter resource is used properly
+
+            fileWriter.write("Patient Name: " + newPrescription.getPatientName());
+            fileWriter.write("\nMedication: " + newPrescription.getMedication());
+            fileWriter.write("\nPharmacy Name: " + newPrescription.getPharmacyName());
+            fileWriter.write("\nPharmacy Location: " + newPrescription.getPharmacyLocation());
+            fileWriter.write("\nPharmacy Phone Number: " + newPrescription.getPharmacyPhoneNumber());
+            fileWriter.write("\nNotes: " + newPrescription.getNote());
+
+        } catch (IOException event) {       // This line starts a catch block and specifies that if an IOException occurs within the try block, the following code will handle the exception
+            event.printStackTrace();        // prints the stack trace of the exception that occurred, providing information about where and how the exception was thrown
+        }
+    }
+
 }
