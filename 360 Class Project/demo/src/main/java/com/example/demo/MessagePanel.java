@@ -63,13 +63,13 @@ public class MessagePanel {
         String demo1 = "Prescription Ready at CVS";
         observableList.add(demo1);
         String demo2 = "Results of Last Visit: Dr. Foo";
-        observableList.add(demo1);
+        observableList.add(demo2);
         String demo3 = "Prescription Ready at CVS";
-        observableList.add(demo1);
+        observableList.add(demo3);
         String demo4 = "Prescription Ready at CVS";
-        observableList.add(demo1);
+        observableList.add(demo4);
         String demo5 = "Results from Last Visit: Dr. Parker";
-        observableList.add(demo1);
+        observableList.add(demo5);
 
         listView.setItems(observableList);
 
