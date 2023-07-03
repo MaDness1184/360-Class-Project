@@ -50,6 +50,7 @@ public class PatientPortal
         leftVBox.getChildren().add(patientIDLabel);
 
         Button changeInfoButton = new Button("Change Information");
+
         changeInfoButton.setStyle("-fx-background-color: #E2CE15;");
         changeInfoButton.setFont(new Font(20));
         leftVBox.getChildren().add(changeInfoButton);

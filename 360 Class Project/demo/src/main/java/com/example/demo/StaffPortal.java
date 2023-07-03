@@ -39,7 +39,7 @@ public class StaffPortal {
         centerVBox.setPrefWidth(100);
         centerBorderPane.setCenter(centerVBox);
 
-        Label welcomeLabel = new Label("Welcome Back, <Insert Name>");
+        Label welcomeLabel = new Label("Welcome Back");
         welcomeLabel.setTextFill(Color.valueOf("#9741a5"));
         welcomeLabel.setFont(new Font(35));
         centerVBox.getChildren().add(welcomeLabel);
@@ -61,6 +61,10 @@ public class StaffPortal {
         messagePortalButton.setPrefWidth(165);
         messagePortalButton.setStyle("-fx-background-color: #E2CE15;");
         messagePortalButton.setFont(new Font(20));
+        messagePortalButton.setOnAction(event -> {
+            MessagePanel messagePortal = new MessagePanel(stage);
+            messagePortal.show();
+        });
         VBox.setMargin(messagePortalButton, new Insets(5));
         centerVBox.getChildren().add(messagePortalButton);
 
@@ -68,6 +72,10 @@ public class StaffPortal {
         logoutButton.setPrefWidth(165);
         logoutButton.setStyle("-fx-background-color: #F17C0F;");
         logoutButton.setFont(new Font(20));
+        logoutButton.setOnAction(event -> {                 // Take user back to login page view
+            LoginPage loginPage = new LoginPage(stage);
+            loginPage.show();
+        });
         VBox.setMargin(logoutButton, new Insets(5));
         centerVBox.getChildren().add(logoutButton);
 
@@ -86,12 +94,20 @@ public class StaffPortal {
         takeVitalButton.setPrefWidth(135);
         takeVitalButton.setStyle("-fx-background-color: #E2CE15;");
         takeVitalButton.setFont(new Font(20));
+        takeVitalButton.setOnAction(event -> {
+            VitalsPanel vitalsPanel = new VitalsPanel(stage);
+            vitalsPanel.show();
+        });
         VBox.setMargin(takeVitalButton, new Insets(5));
         centerVBox.getChildren().add(takeVitalButton);
 
         Button examinationButton = new Button("Examination");
         examinationButton.setStyle("-fx-background-color: #E2CE15;");
         examinationButton.setFont(new Font(20));
+        examinationButton.setOnAction(event -> {
+            ExaminationPortal examinationPortal = new ExaminationPortal(stage);
+            examinationPortal.show();
+        });
         VBox.setMargin(examinationButton, new Insets(5));
         centerVBox.getChildren().add(examinationButton);
 
