@@ -75,6 +75,17 @@ public class MessagePanel {
         closeButton.setFont(new Font(15));
         StackPane.setMargin(closeButton, new Insets(5));
         stackPane.getChildren().add(closeButton);
+        closeButton.setOnAction(e -> {
+            Account activeAccount = AccountManager.activeAccount;
+
+            if(activeAccount.isStaff){
+                StaffPortal staffPortal = new StaffPortal(stage);
+                staffPortal.show();
+            }else{
+                PatientPortal patientPortal = new PatientPortal(stage);
+                patientPortal.show();
+            }
+        });
 
         Label label2 = new Label("New Message");
         label2.setTextFill(Color.web("#9741a5"));

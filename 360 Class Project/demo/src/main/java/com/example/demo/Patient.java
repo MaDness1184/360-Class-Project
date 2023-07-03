@@ -126,7 +126,7 @@ public class Patient extends Account
     {
         prescriptions.add(prescription);
     }
-/*
+
     public static void savePatientInfoToFile(Patient newPatient) {
         String patientFileName = newPatient.getID() + "_PatientExamData.txt";        // Create a patient file named xxxxx_PatientExamData.txt
 
@@ -150,7 +150,7 @@ public class Patient extends Account
             event.printStackTrace();        // prints the stack trace of the exception that occurred, providing information about where and how the exception was thrown
         }
     }
-
+/*
     private void savePrescriptionInfoToFile(ExaminationPortal.Prescription newPrescription) {
         String prescriptionFileName = newPrescription.getPatientName() + "_Medication.txt";      // Create a patient file named Name_Medication.txt
 

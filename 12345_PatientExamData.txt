@@ -1,9 +1,0 @@
-Patient ID: 12345
-Vital Signs: Sample
-Vision Acuity: Sample
-Cardiovascular Health: Sample
-Respiratory Health,: Sample
-Neuro Health, : Sample
-Musculoskeletal Assessment: Sample
-Skin And Lymph Nodes: Sample
-Diagnosis: Sample

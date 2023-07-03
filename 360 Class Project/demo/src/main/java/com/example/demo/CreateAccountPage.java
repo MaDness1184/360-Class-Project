@@ -156,7 +156,6 @@ public class CreateAccountPage
 
                 System.out.println(newAccount);
                 System.out.println(newAccount.getID());
-                System.out.println(newAccount.birthday);
 
                 LoginPage loginPage = new LoginPage(stage);
                 loginPage.show();
@@ -282,6 +281,10 @@ public class CreateAccountPage
             String username = usernameField.getText();
             String password = passwordField.getText();
 
+            String email = "no";
+            Account newAccount = new Account(firstName,lastName, dateOfBirth, phoneNumber, email , username, password, false);
+                    newAccount.saveAccountInfoToFile();
+
             if(firstName.isEmpty() || lastName.isEmpty() || dateOfBirth == null || phoneNumber.isEmpty() || username.isEmpty() || password.isEmpty()) {
                 // Handle empty fields
                 Alert noFields = new Alert(Alert.AlertType.ERROR);
@@ -291,6 +294,7 @@ public class CreateAccountPage
             }
             else
             {
+
                 activeAccount.firstName = firstName;
                 activeAccount.lastName = lastName;
                 activeAccount.birthday = dateOfBirth;
