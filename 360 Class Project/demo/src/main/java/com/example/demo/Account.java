@@ -20,7 +20,6 @@ public class Account {
     protected String password;
     protected boolean isStaff;
 
-
     //todo
     private List<Message> messages = new ArrayList<>();
 
