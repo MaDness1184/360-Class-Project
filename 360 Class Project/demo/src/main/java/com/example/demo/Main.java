@@ -10,6 +10,27 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         LoginPage loginPage = new LoginPage(stage);
 
+        // Staff Accounts
+        String firstName, lastName, phoneNum, email, username, password;
+        firstName = "Dr. Fu";
+        lastName = "Bar";
+        phoneNum = "951-886-5555";
+        email = "fubarmd@healfy.com";
+        username = "fubar";
+        password = "password1";
+        Account doctor = new Account(firstName, lastName, phoneNum, email, username, password);
+
+        firstName = "Missy";
+        lastName = "Pissy";
+        phoneNum = "951-390-4563";
+        email = "misspiss@healfy.com";
+        username = "misspiss";
+        password = "password2";
+        Account nurse = new Account(firstName, lastName, phoneNum, email, username, password);
+
+        AccountManager.AddAccount(doctor);
+        AccountManager.AddAccount(nurse);
+
         // Set preferred window size
         stage.setWidth(800);
         stage.setHeight(600);
