@@ -11,6 +11,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class PatientPortal
 {
     private Stage stage;
@@ -72,22 +76,11 @@ public class PatientPortal
         });
 
         VBox bottomVBox = new VBox();
-        bottomVBox.setAlignment(Pos.TOP_CENTER);
+        bottomVBox.setAlignment(Pos.CENTER);
         bottomVBox.setPrefHeight(220);
         bottomVBox.setPrefWidth(800);
         root.setBottom(bottomVBox);
 
-        Label recentVisitLabel = new Label("Recent Visits");
-        recentVisitLabel.setTextFill(Color.web("#9741a5"));
-        recentVisitLabel.setUnderline(true);
-        recentVisitLabel.setFont(new Font(20));
-        bottomVBox.getChildren().add(recentVisitLabel);
-
-        ListView<String> recentVisitList = new ListView<>();
-        recentVisitList.setPrefHeight(185);
-        recentVisitList.setPrefWidth(785);
-        recentVisitList.setStyle("-fx-background-color: #D9D9D9; -fx-background-radius: 10;");
-        bottomVBox.getChildren().add(recentVisitList);
 
         BorderPane centerBorderPane = new BorderPane();
         centerBorderPane.setPrefHeight(420);
@@ -105,17 +98,103 @@ public class PatientPortal
         welcomeLabel.setFont(new Font(30));
         centerVBox.getChildren().add(welcomeLabel);
 
-        Label recentMessagesLabel = new Label("Recent Messages");
-        recentMessagesLabel.setTextFill(Color.web("#9741a5"));
-        recentMessagesLabel.setUnderline(true);
-        recentMessagesLabel.setFont(new Font(20));
-        centerVBox.getChildren().add(recentMessagesLabel);
+        Label PatientIDLabel = new Label("Patient ID:");
+        PatientIDLabel.setTextFill(Color.web("#9741a5"));
+        PatientIDLabel.setFont(new Font(20));
+        leftVBox.getChildren().add(PatientIDLabel);
 
-        ListView<String> messagesList = new ListView<>();
-        messagesList.setPrefHeight(280);
-        messagesList.setPrefWidth(650);
-        messagesList.setStyle("-fx-background-color: #D9D9D9; -fx-background-radius: 10;");
-        centerVBox.getChildren().add(messagesList);
+        TextField recordID = new TextField();
+        recordID.setStyle("-fx-background-radius: 10; -fx-background-color: #ECECEC;");
+        recordID.setFont(new Font(20));
+        VBox.setMargin(recordID, new Insets(5));
+        leftVBox.getChildren().add(recordID);
+
+        Label patientRecordLabel = new Label("Patient Records:");
+        patientRecordLabel.setTextFill(Color.web("#9741a5"));
+        patientRecordLabel.setFont(new Font(20));
+        leftVBox.getChildren().add(patientRecordLabel);
+
+        TextArea recordView = new TextArea();
+        recordView.setPrefHeight(420);
+        recordView.setPrefWidth(230);
+        recordView.setStyle("-fx-background-color: #ECECEC; -fx-background-radius: 10;");
+        recordView.setWrapText(true); // Enable text wrapping
+        VBox.setMargin(recordView, new Insets(5));
+        leftVBox.getChildren().add(recordView);
+
+
+        Button viewButton = new Button("  View  ");
+        viewButton.setStyle("-fx-background-color: #E2CE15;");
+        viewButton.setFont(new Font(15));
+        leftVBox.getChildren().add(viewButton);
+        viewButton.setOnAction(e -> {
+            String recordIDText = recordID.getText();
+            String examinationFileName = recordIDText+ "_PatientExamData.txt";
+
+
+            StringBuilder recordBuilder = new StringBuilder();
+
+            // Read patient examination data
+            try (BufferedReader reader = new BufferedReader(new FileReader(examinationFileName))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    recordBuilder.append(line).append("\n");
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+            // Set the text of recordView with the combined data
+            recordView.setText(recordBuilder.toString());
+        });
+
+        Label patientNameLabel = new Label("Patient Name:");
+        patientNameLabel.setTextFill(Color.web("#9741a5"));
+        patientNameLabel.setFont(new Font(20));
+        leftVBox.getChildren().add(patientNameLabel);
+
+        TextField PatientName = new TextField();
+        PatientName.setStyle("-fx-background-radius: 10; -fx-background-color: #ECECEC;");
+        PatientName.setFont(new Font(20));
+        VBox.setMargin(PatientName, new Insets(5));
+        leftVBox.getChildren().add(PatientName);
+
+        Label patientPharmacyInfo = new Label("Pharmacy Infomation:");
+        patientPharmacyInfo.setTextFill(Color.web("#9741a5"));
+        patientPharmacyInfo.setFont(new Font(20));
+        leftVBox.getChildren().add(patientPharmacyInfo);
+
+        TextArea PharrecordView = new TextArea();
+        PharrecordView.setPrefHeight(420);
+        PharrecordView.setPrefWidth(230);
+        PharrecordView.setStyle("-fx-background-color: #ECECEC; -fx-background-radius: 10;");
+        PharrecordView.setWrapText(true); // Enable text wrapping
+        VBox.setMargin(PharrecordView, new Insets(5));
+        leftVBox.getChildren().add(PharrecordView);
+
+        Button viewButton1 = new Button("  View  ");
+        viewButton1.setStyle("-fx-background-color: #E2CE15;");
+        viewButton1.setFont(new Font(15));
+        leftVBox.getChildren().add(viewButton1);
+        viewButton1.setOnAction(e -> {
+            String recordNameText = PatientName.getText();
+            String prescriptionFileName = recordNameText + "_Medication.txt";
+
+            StringBuilder PharRecordBuilder = new StringBuilder();
+
+            // Read patient prescription data
+            try (BufferedReader reader = new BufferedReader(new FileReader(prescriptionFileName))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    PharRecordBuilder.append(line).append("\n");
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
+            // Set the text of PharRecordView with the prescription data
+            PharrecordView.setText(PharRecordBuilder.toString());
+        });
 
         Button messageButton = new Button("Message Portal");
         messageButton.setStyle("-fx-background-color: #E2CE15;");
@@ -129,7 +208,7 @@ public class PatientPortal
 
 
 
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 1600, 1200);
         return scene;
     }
 }
