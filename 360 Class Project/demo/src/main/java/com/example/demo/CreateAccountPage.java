@@ -103,6 +103,7 @@ public class CreateAccountPage
         passwordField.setBackground(new Background(new BackgroundFill(Color.web("#ECECEC"), new CornerRadii(10.0), Insets.EMPTY)));
         passwordField.setMaxWidth(250);
 
+
         //Create account button.
         Button createAccountButton = new Button("Create Account");
         createAccountButton.setStyle("-fx-background-color: #E2CE15; -fx-background-radius: 5");
@@ -122,6 +123,23 @@ public class CreateAccountPage
                 noFields.setHeaderText("Required Information Missing");                      // Display alert header
                 noFields.showAndWait();
             }
+            else if (dateOfBirth.isAfter(LocalDate.now())) {
+                // Handle future date of birth
+                Alert futureDateAlert = new Alert(Alert.AlertType.ERROR);
+                futureDateAlert.setTitle("Error");
+                futureDateAlert.setHeaderText("Invalid Date of Birth");
+                futureDateAlert.setContentText("Please enter a valid date of birth.");
+                futureDateAlert.showAndWait();
+            }
+            else if (!phoneNumber.matches("\\d*")) {
+                // Handle invalid phone number
+                Alert invalidPhoneNumber = new Alert(Alert.AlertType.ERROR);
+                invalidPhoneNumber.setTitle("Error");
+                invalidPhoneNumber.setHeaderText("Invalid Phone Number");
+                invalidPhoneNumber.setContentText("Please enter a valid phone number(Numbers only).");
+                invalidPhoneNumber.showAndWait();
+            }
+
             else
             {
                 Account newAccount = new Account(firstName, lastName, phoneNumber, "", username, password);
