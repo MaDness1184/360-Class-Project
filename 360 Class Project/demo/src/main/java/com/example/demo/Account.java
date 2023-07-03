@@ -1,13 +1,16 @@
 package com.example.demo;
 import javafx.application.Application;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.List;
 
 public class Account {
     protected String firstName;
     protected String lastName;
     protected String phoneNum;
     protected String email;
+    protected int birthday;
     protected int userId;
     protected String username;
     protected String password;
@@ -15,7 +18,12 @@ public class Account {
     protected boolean isDoctor;
 
     //todo
-    //private messages list<message>;
+    private List<Message> messages = new ArrayList<>();
+
+    public void AddMessage(Message message)
+    {
+        messages.add(message);
+    }
 
     // should probably be moved to accountManager, it's just here to show how ID's could be done
     private int count = 0;
