@@ -150,6 +150,21 @@ public class MessagePanel {
         HBox.setMargin(sendButton, new Insets(5));
         sendButtonHBox.getChildren().add(sendButton);
 
+        // Back to Patient portal
+        Button BackButton = new Button("Back");
+        BackButton.setStyle("-fx-background-color: #FFA500; -fx-background-radius: 5");
+        BackButton.setPrefWidth(70);
+        BackButton.setPrefHeight(25);
+        BackButton.setFont(new Font(20));
+        HBox.setMargin(BackButton, new Insets(5));
+        rightVBox.getChildren().add(BackButton);
+        BackButton.setAlignment(Pos.BOTTOM_RIGHT);
+        BackButton.setOnAction(event -> {                 // Take user back to Patient Portal
+            PatientPortal patientPanel = new PatientPortal(stage);
+            patientPanel.show();
+        });
+
+
         Scene scene = new Scene(root, 800, 600);
         return scene;
     }

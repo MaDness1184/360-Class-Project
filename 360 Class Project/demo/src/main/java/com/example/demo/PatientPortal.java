@@ -117,6 +117,12 @@ public class PatientPortal
         messageButton.setFont(new Font(20));
         VBox.setMargin(messageButton, new Insets(5));
         centerVBox.getChildren().add(messageButton);
+        messageButton.setOnAction(e ->  {
+            MessagePanel messagePanel = new MessagePanel(stage);
+            messagePanel.show();
+        });
+
+
 
         Scene scene = new Scene(root, 800, 600);
         return scene;
