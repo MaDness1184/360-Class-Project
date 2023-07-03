@@ -1,6 +1,9 @@
 package com.example.demo;
 import javafx.application.Application;
+import javafx.scene.control.DatePicker;
+
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.List;
@@ -10,7 +13,7 @@ public class Account {
     protected String lastName;
     protected String phoneNum;
     protected String email;
-    protected int birthday;
+    protected LocalDate birthday;
     protected int userId;
     protected String username;
     protected String password;
@@ -29,6 +32,7 @@ public class Account {
     public Account () {
         this.firstName = "John";
         this.lastName = "Doe";
+        this.birthday = null;
         this.phoneNum = "0000000000";
         this.email = "N/A";
         this.userId = idGen();
@@ -39,9 +43,10 @@ public class Account {
     }
 
     // the correct constructor to be used by reception form
-    public Account(String firstName, String lastName, String phoneNum, String email, String username, String password) {
+    public Account(String firstName, String lastName, LocalDate dateOfBirth, String phoneNum, String email, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.birthday = dateOfBirth;
         this.phoneNum = phoneNum;
         this.email = email;
         this.userId = idGen();
