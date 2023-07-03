@@ -67,23 +67,19 @@ public class LoginPage {
             {
                 AccountManager.activeAccount = account;
 
-                if (account.isDoctor)
+                if (account.isDoctor || account.isNurse)
                 {
-                    // PUSH TO DOCTOR'S PANEL
+                    StaffPortal staffPortal = new StaffPortal(stage);
+                    staffPortal.show();
+                }
+                else
+                {
+                    System.out.println(account);
+                    System.out.println("Successful login!");
+                    PatientPortal patientPortal = new PatientPortal(stage);
+                    patientPortal.show();
                 }
 
-                if (account.isNurse)
-                {
-                    // PUSH TO NURSE'S PANEL
-                }
-
-
-
-
-                System.out.println(account);
-                System.out.println("Successful login!");
-                PatientPortal patientPortal = new PatientPortal(stage);
-                patientPortal.show();
             }
             else {
                 // If no, show error message

@@ -19,6 +19,7 @@ public class Main extends Application {
         username = "fubar";
         password = "password1";
         Account doctor = new Account(firstName, lastName, phoneNum, email, username, password);
+        doctor.isDoctor = true;
 
         firstName = "Missy";
         lastName = "Pissy";
@@ -27,6 +28,7 @@ public class Main extends Application {
         username = "misspiss";
         password = "password2";
         Account nurse = new Account(firstName, lastName, phoneNum, email, username, password);
+        nurse.isNurse = true;
 
         AccountManager.AddAccount(doctor);
         AccountManager.AddAccount(nurse);
