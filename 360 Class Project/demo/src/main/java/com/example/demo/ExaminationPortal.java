@@ -13,8 +13,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class ExaminationPortal {
     private Stage stage;
@@ -269,14 +267,14 @@ public class ExaminationPortal {
 
 
         // Back to main view (Log out button)
-        Button LogoutButton = new Button("Logout");      // Create Log Out button
-        LogoutButton.setStyle("-fx-background-color: #FFA500; -fx-background-radius: 5");
-        LogoutButton.setPrefWidth(70);
-        LogoutButton.setPrefHeight(25);
-        LogoutButton.setAlignment(Pos.CENTER);
-        LogoutButton.setOnAction(event -> {                 // Take user back to login page view
-            LoginPage loginPage = new LoginPage(stage);
-            loginPage.show();
+        Button backButton = new Button("Leave");      // Create Log Out button
+        backButton.setStyle("-fx-background-color: #FFA500; -fx-background-radius: 5");
+        backButton.setPrefWidth(70);
+        backButton.setPrefHeight(25);
+        backButton.setAlignment(Pos.CENTER);
+        backButton.setOnAction(event -> {                 // Take user back to login page view
+            StaffPortal staffPortal = new StaffPortal(stage);
+            staffPortal.show();
         });
 
 
@@ -302,7 +300,7 @@ public class ExaminationPortal {
         Hlayout.setAlignment(Pos.CENTER);
 
         HBox LogoutButtonLayout = new HBox();
-        LogoutButtonLayout.getChildren().addAll(LogoutButton);
+        LogoutButtonLayout.getChildren().addAll(backButton);
         LogoutButtonLayout.setAlignment(Pos.BOTTOM_RIGHT);
         LogoutButtonLayout.setPadding(new Insets(0, 10, 10, 0));
 

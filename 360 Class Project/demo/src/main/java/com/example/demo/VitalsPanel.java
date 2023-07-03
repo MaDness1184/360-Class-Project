@@ -213,8 +213,19 @@ public class VitalsPanel {
         PhysicalExamSection.setPadding(new Insets(20, 20, 20, 20));
         PhysicalExamSection.setAlignment(Pos.CENTER_LEFT);
 
+        // Back to main view (Log out button)
+        Button backButton = new Button("Leave");      // Create Log Out button
+        backButton.setStyle("-fx-background-color: #FFA500; -fx-background-radius: 5");
+        backButton.setPrefWidth(70);
+        backButton.setPrefHeight(25);
+        backButton.setAlignment(Pos.CENTER);
+        backButton.setOnAction(event -> {                 // Take user back to login page view
+            StaffPortal staffPortal = new StaffPortal(stage);
+            staffPortal.show();
+        });
 
-        VBox Misc = new VBox(1, misc, patientID, patientIDText, notes, notesText);
+
+        VBox Misc = new VBox(1, misc, patientID, patientIDText, notes, notesText, backButton);
         Misc.setBackground(new Background(new BackgroundFill(Color.web("#FFFFFE"), CornerRadii.EMPTY, Insets.EMPTY)));
         Misc.setPadding(new Insets(20, 20, 20, 20));
         Misc.setAlignment(Pos.CENTER_LEFT);

@@ -27,6 +27,7 @@ public class StaffPortal {
 
     private Scene createScene(){
         BorderPane root = new BorderPane();
+        Account activeAccount = AccountManager.activeAccount;
 
         BorderPane centerBorderPane = new BorderPane();
         centerBorderPane.setPrefHeight(420);
@@ -39,7 +40,7 @@ public class StaffPortal {
         centerVBox.setPrefWidth(100);
         centerBorderPane.setCenter(centerVBox);
 
-        Label welcomeLabel = new Label("Welcome Back");
+        Label welcomeLabel = new Label("Welcome Back, " + activeAccount.firstName);
         welcomeLabel.setTextFill(Color.valueOf("#9741a5"));
         welcomeLabel.setFont(new Font(35));
         centerVBox.getChildren().add(welcomeLabel);
@@ -65,20 +66,11 @@ public class StaffPortal {
             MessagePanel messagePortal = new MessagePanel(stage);
             messagePortal.show();
         });
-        VBox.setMargin(messagePortalButton, new Insets(5));
+        VBox.setMargin(messagePortalButton, new Insets(10,5,5,5));
         centerVBox.getChildren().add(messagePortalButton);
 
-        Button logoutButton = new Button("Logout");
-        logoutButton.setPrefWidth(165);
-        logoutButton.setStyle("-fx-background-color: #F17C0F;");
-        logoutButton.setFont(new Font(20));
-        logoutButton.setOnAction(event -> {                 // Take user back to login page view
-            LoginPage loginPage = new LoginPage(stage);
-            loginPage.show();
-        });
-        VBox.setMargin(logoutButton, new Insets(5));
-        centerVBox.getChildren().add(logoutButton);
 
+        /*
         Label instructionLabel = new Label("Enter Patient ID to Start Test:");
         instructionLabel.setTextFill(Color.web("#9741a5"));
         instructionLabel.setFont(new Font(20));
@@ -89,6 +81,7 @@ public class StaffPortal {
         testID.setFont(new Font(20));
         testID.setAlignment(Pos.CENTER);
         centerVBox.getChildren().add(testID);
+         */
 
         Button takeVitalButton = new Button("Take Vitals");
         takeVitalButton.setPrefWidth(135);
@@ -110,6 +103,17 @@ public class StaffPortal {
         });
         VBox.setMargin(examinationButton, new Insets(5));
         centerVBox.getChildren().add(examinationButton);
+
+        Button logoutButton = new Button("Logout");
+        logoutButton.setPrefWidth(165);
+        logoutButton.setStyle("-fx-background-color: #F17C0F;");
+        logoutButton.setFont(new Font(20));
+        logoutButton.setOnAction(event -> {                 // Take user back to login page view
+            LoginPage loginPage = new LoginPage(stage);
+            loginPage.show();
+        });
+        VBox.setMargin(logoutButton, new Insets(5));
+        centerVBox.getChildren().add(logoutButton);
 
         VBox leftVBox = new VBox();
         leftVBox.setAlignment(Pos.TOP_CENTER);

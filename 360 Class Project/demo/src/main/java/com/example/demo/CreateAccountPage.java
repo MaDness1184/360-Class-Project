@@ -156,7 +156,6 @@ public class CreateAccountPage
 
                 System.out.println(newAccount);
                 System.out.println(newAccount.getID());
-                System.out.println(newAccount.birthday);
 
                 LoginPage loginPage = new LoginPage(stage);
                 loginPage.show();
