@@ -170,7 +170,7 @@ public class VitalsPanel {
             temp.setMeds(pMeds);
             temp.setNotes(pNotes);
 
-            //Patient.savePatientInfoToFile(newPatient);
+            Patient.savePatientInfoToFile(temp);
 
             // Display success message after save button is clicked
             Alert intakeAlert = new Alert(Alert.AlertType.INFORMATION);

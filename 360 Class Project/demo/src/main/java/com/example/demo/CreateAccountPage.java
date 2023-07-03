@@ -290,6 +290,12 @@ public class CreateAccountPage
             }
             else
             {
+                String email = "no";
+
+               Account newAccout = new Account(firstName,lastName, dateOfBirth, phoneNumber, email , username, password, false);
+
+               Account.saveAccountInfoToFile(newAccout);
+
                 activeAccount.firstName = firstName;
                 activeAccount.lastName = lastName;
                 activeAccount.birthday = dateOfBirth;
