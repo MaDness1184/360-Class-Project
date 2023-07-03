@@ -86,20 +86,20 @@ public class Account {
         //todo
     }
 
-    public static void saveAccountInfoToFile(Account newAccount) {
-        String patientFileName = newAccount.getID() + "_PatientExamData.txt";        // Create a patient file named xxxxx_PatientExamData.txt
+    public void saveAccountInfoToFile() {
+        String accountFileName = userId + "_PatientExamData.txt";        // Create a patient file named xxxxx_PatientExamData.txt
 
-        try (FileWriter fileWriter = new FileWriter(patientFileName)) {                    // Open try block and used for exception handling and ensures fileWriter resource is used properly
+        try (FileWriter fileWriter = new FileWriter(accountFileName)) {                    // Open try block and used for exception handling and ensures fileWriter resource is used properly
 
-            fileWriter.write("First Name: " + newAccount.getFirstName());
-            fileWriter.write("\nLast Name: " + newAccount.getLastName());
-            fileWriter.write("\nPatient ID: " + newAccount.getID());
-            fileWriter.write("\nBirthday: " + newAccount.getBirthday());
-            fileWriter.write("\nPhone Number: " + newAccount.getPhoneNum());
-            fileWriter.write("\nUsername: " + newAccount.getUsername());
-            fileWriter.write("\nPassword: " + newAccount.getPassword());
+            fileWriter.write("First Name: " + firstName);
+            fileWriter.write("\nLast Name: " + lastName);
+            fileWriter.write("\nPatient ID: " + userId);
+            fileWriter.write("\nBirthday: " + birthday);
+            fileWriter.write("\nPhone Number: " + phoneNum);
+            fileWriter.write("\nUsername: " + username);
+            fileWriter.write("\nPassword: " + password);
 
-
+            System.out.println("Patient data saved successfully!"); // sanity verification
         } catch (
                 IOException event) {       // This line starts a catch block and specifies that if an IOException occurs within the try block, the following code will handle the exception
             event.printStackTrace();        // prints the stack trace of the exception that occurred, providing information about where and how the exception was thrown

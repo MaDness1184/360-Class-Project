@@ -1,4 +1,0 @@
-Patient Name: Sample
-Medication: Sample
-Pharmacy: Sample
-Notes: Sample
