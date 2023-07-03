@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class Main extends Application {
     @Override
@@ -12,23 +13,24 @@ public class Main extends Application {
 
         // Staff Accounts
         String firstName, lastName, phoneNum, email, username, password;
+        LocalDate dateOfBirth;
         firstName = "Dr. Fu";
         lastName = "Bar";
+        dateOfBirth = null;
         phoneNum = "951-886-5555";
         email = "fubarmd@healfy.com";
         username = "fubar";
         password = "password1";
-        Account doctor = new Account(firstName, lastName, phoneNum, email, username, password);
-        doctor.isDoctor = true;
+        Account doctor = new Account(firstName, lastName, dateOfBirth, phoneNum, email, username, password);
 
         firstName = "Missy";
         lastName = "Pissy";
+        dateOfBirth = null;
         phoneNum = "951-390-4563";
         email = "misspiss@healfy.com";
         username = "misspiss";
         password = "password2";
-        Account nurse = new Account(firstName, lastName, phoneNum, email, username, password);
-        nurse.isNurse = true;
+        Account nurse = new Account(firstName, lastName, dateOfBirth, phoneNum, email, username, password);
 
         AccountManager.AddAccount(doctor);
         AccountManager.AddAccount(nurse);

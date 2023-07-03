@@ -54,6 +54,10 @@ public class PatientPortal
         changeInfoButton.setStyle("-fx-background-color: #E2CE15;");
         changeInfoButton.setFont(new Font(20));
         leftVBox.getChildren().add(changeInfoButton);
+        changeInfoButton.setOnAction(e -> {
+            CreateAccountPage createAccountPage = new CreateAccountPage(stage);
+            createAccountPage.showNewInfo();
+        });
 
         Button logoutButton = new Button("Logout");
         logoutButton.setPrefHeight(45);
