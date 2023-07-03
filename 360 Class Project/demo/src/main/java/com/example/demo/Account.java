@@ -25,9 +25,6 @@ public class Account {
         messages.add(message);
     }
 
-    // should probably be moved to accountManager, it's just here to show how ID's could be done
-    private int count = 0;
-
     // default constructor
     public Account () {
         this.firstName = "John";
