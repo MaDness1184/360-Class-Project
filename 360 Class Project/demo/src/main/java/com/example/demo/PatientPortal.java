@@ -1,4 +1,6 @@
 package com.example.demo;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -82,6 +84,30 @@ public class PatientPortal
         root.setBottom(bottomVBox);
 
 
+        Label recentVisitLabel = new Label("Recent Visits");
+        recentVisitLabel.setTextFill(Color.web("#9741a5"));
+        recentVisitLabel.setUnderline(true);
+        recentVisitLabel.setFont(new Font(20));
+        bottomVBox.getChildren().add(recentVisitLabel);
+
+        ListView<String> recentVisitList = new ListView<>();
+        recentVisitList.setPrefHeight(185);
+        recentVisitList.setPrefWidth(785);
+        recentVisitList.setStyle("-fx-background-color: #D9D9D9; -fx-background-radius: 10;");
+        ObservableList<String> observableList = FXCollections.observableArrayList();
+
+        String demo1 = "Visit Result 1/22/23";
+        observableList.add(demo1);
+        String demo2 = "Visit Result 10/22/22";
+        observableList.add(demo2);
+
+
+        recentVisitList.setItems(observableList);
+
+
+        bottomVBox.getChildren().add(recentVisitList);
+
+
         BorderPane centerBorderPane = new BorderPane();
         centerBorderPane.setPrefHeight(420);
         centerBorderPane.setPrefWidth(600);
@@ -97,6 +123,7 @@ public class PatientPortal
         welcomeLabel.setTextFill(Color.web("#9741a5"));
         welcomeLabel.setFont(new Font(30));
         centerVBox.getChildren().add(welcomeLabel);
+
 
         Label PatientIDLabel = new Label("Patient ID:");
         PatientIDLabel.setTextFill(Color.web("#9741a5"));
@@ -195,6 +222,37 @@ public class PatientPortal
             // Set the text of PharRecordView with the prescription data
             PharrecordView.setText(PharRecordBuilder.toString());
         });
+
+        Label recentMessagesLabel = new Label("Recent Messages");
+        recentMessagesLabel.setTextFill(Color.web("#9741a5"));
+        recentMessagesLabel.setUnderline(true);
+        recentMessagesLabel.setFont(new Font(20));
+
+
+
+        centerVBox.getChildren().add(recentMessagesLabel);
+
+        ListView<String> messagesList = new ListView<>();
+        messagesList.setPrefHeight(280);
+        messagesList.setPrefWidth(650);
+        messagesList.setStyle("-fx-background-color: #D9D9D9; -fx-background-radius: 10;");
+
+        ObservableList<String> messageListO = FXCollections.observableArrayList();
+
+        String demo12 = "Prescription Ready at CVS";
+        messageListO.add(demo12);
+        String demo21 = "Results of Last Visit: Dr. Foo";
+        messageListO.add(demo21);
+        String demo3 = "Prescription Ready at CVS";
+        messageListO.add(demo3);
+        String demo4 = "Prescription Ready at CVS";
+        messageListO.add(demo4);
+
+        messagesList.setItems(messageListO);
+
+
+        centerVBox.getChildren().add(messagesList);
+
 
         Button messageButton = new Button("Message Portal");
         messageButton.setStyle("-fx-background-color: #E2CE15;");
