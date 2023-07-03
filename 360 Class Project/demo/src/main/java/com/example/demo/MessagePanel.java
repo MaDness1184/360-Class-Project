@@ -71,7 +71,7 @@ public class MessagePanel {
         rightVBox.getChildren().add(stackPane);
 
         Button closeButton = new Button("X");
-        closeButton.setStyle("-fx-background-radius: 15;");
+       // closeButton.setStyle("-fx-background-radius: 15;");
         closeButton.setFont(new Font(15));
         StackPane.setMargin(closeButton, new Insets(5));
         stackPane.getChildren().add(closeButton);

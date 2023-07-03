@@ -13,6 +13,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ExaminationPortal {
     private Stage stage;
