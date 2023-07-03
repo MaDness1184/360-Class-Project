@@ -149,7 +149,7 @@ public class CreateAccountPage
 
             else
             {
-                Account newAccount = new Account(firstName, lastName, dateOfBirth, phoneNumber, "", username, password);
+                Account newAccount = new Account(firstName, lastName, dateOfBirth, phoneNumber, "", username, password, false);
 
                 AccountManager accountManager = new AccountManager();
                 accountManager.AddAccount(newAccount);

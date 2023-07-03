@@ -67,7 +67,7 @@ public class LoginPage {
             {
                 AccountManager.activeAccount = account;
 
-                if (account.isDoctor || account.isNurse)
+                if (account.isStaff)
                 {
                     StaffPortal staffPortal = new StaffPortal(stage);
                     staffPortal.show();

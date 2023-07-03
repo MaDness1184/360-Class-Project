@@ -17,8 +17,8 @@ public class Account {
     protected int userId;
     protected String username;
     protected String password;
-    protected boolean isNurse;
-    protected boolean isDoctor;
+    protected boolean isStaff;
+
 
     //todo
     private List<Message> messages = new ArrayList<>();
@@ -38,12 +38,11 @@ public class Account {
         this.userId = idGen();
         this.username = "N/A";
         this.password = "N/A";
-        this.isNurse = false;
-        this.isDoctor = false;
+        this.isStaff = false;
     }
 
     // the correct constructor to be used by reception form
-    public Account(String firstName, String lastName, LocalDate dateOfBirth, String phoneNum, String email, String username, String password) {
+    public Account(String firstName, String lastName, LocalDate dateOfBirth, String phoneNum, String email, String username, String password, boolean isStaff) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = dateOfBirth;
@@ -52,8 +51,7 @@ public class Account {
         this.userId = idGen();
         this.username = username;
         this.password = password;
-        this.isNurse = false;
-        this.isDoctor = false;
+        this.isStaff = isStaff;
     }
 
     // uses count to generate sequential user IDs
@@ -88,11 +86,5 @@ public class Account {
         //todo
     }
 
-    // checks if account is staff or not
-    public boolean isStaff () {
-
-        return (this.isNurse == true || this.isDoctor == true);
-
-    }
 }
 

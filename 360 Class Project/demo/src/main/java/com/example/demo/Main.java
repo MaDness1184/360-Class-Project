@@ -14,6 +14,7 @@ public class Main extends Application {
         // Staff Accounts
         String firstName, lastName, phoneNum, email, username, password;
         LocalDate dateOfBirth;
+        boolean isStaff;
         firstName = "Dr. Fu";
         lastName = "Bar";
         dateOfBirth = null;
@@ -21,7 +22,8 @@ public class Main extends Application {
         email = "fubarmd@healfy.com";
         username = "fubar";
         password = "password1";
-        Account doctor = new Account(firstName, lastName, dateOfBirth, phoneNum, email, username, password);
+        isStaff = true;
+        Account doctor = new Account(firstName, lastName, dateOfBirth, phoneNum, email, username, password, isStaff);
 
         firstName = "Missy";
         lastName = "Pissy";
@@ -30,7 +32,8 @@ public class Main extends Application {
         email = "misspiss@healfy.com";
         username = "misspiss";
         password = "password2";
-        Account nurse = new Account(firstName, lastName, dateOfBirth, phoneNum, email, username, password);
+        isStaff = true;
+        Account nurse = new Account(firstName, lastName, dateOfBirth, phoneNum, email, username, password, isStaff);
 
         AccountManager.AddAccount(doctor);
         AccountManager.AddAccount(nurse);
