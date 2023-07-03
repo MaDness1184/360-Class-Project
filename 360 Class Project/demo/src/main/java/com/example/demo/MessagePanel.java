@@ -1,12 +1,11 @@
 package com.example.demo;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -14,6 +13,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
+import javax.security.auth.callback.Callback;
 
 public class MessagePanel {
     private Stage stage;
@@ -57,6 +58,20 @@ public class MessagePanel {
         listView.setStyle("-fx-background-color: #ECECEC; -fx-background-radius: 10;");
         VBox.setMargin(listView, new Insets(10));
         leftVBox.getChildren().add(listView);
+        ObservableList<String> observableList = FXCollections.observableArrayList();
+
+        String demo1 = "Prescription Ready at CVS";
+        observableList.add(demo1);
+        String demo2 = "Results of Last Visit: Dr. Foo";
+        observableList.add(demo2);
+        String demo3 = "Prescription Ready at CVS";
+        observableList.add(demo3);
+        String demo4 = "Prescription Ready at CVS";
+        observableList.add(demo4);
+        String demo5 = "Results from Last Visit: Dr. Parker";
+        observableList.add(demo5);
+
+        listView.setItems(observableList);
 
         VBox rightVBox = new VBox();
         rightVBox.setAlignment(Pos.TOP_CENTER);
@@ -71,7 +86,7 @@ public class MessagePanel {
         rightVBox.getChildren().add(stackPane);
 
         Button closeButton = new Button("X");
-        closeButton.setStyle("-fx-background-radius: 15;");
+       // closeButton.setStyle("-fx-background-radius: 15;");
         closeButton.setFont(new Font(15));
         StackPane.setMargin(closeButton, new Insets(5));
         stackPane.getChildren().add(closeButton);

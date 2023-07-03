@@ -20,7 +20,6 @@ public class Account {
     protected String password;
     protected boolean isStaff;
 
-
     //todo
     private List<Message> messages = new ArrayList<>();
 
@@ -88,6 +87,7 @@ public class Account {
 
     public void saveAccountInfoToFile() {
         String accountFileName = userId + "_PatientExamData.txt";        // Create a patient file named xxxxx_PatientExamData.txt
+
 
         try (FileWriter fileWriter = new FileWriter(accountFileName)) {                    // Open try block and used for exception handling and ensures fileWriter resource is used properly
 

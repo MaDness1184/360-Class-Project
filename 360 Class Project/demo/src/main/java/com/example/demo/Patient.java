@@ -150,8 +150,8 @@ public class Patient extends Account
             event.printStackTrace();        // prints the stack trace of the exception that occurred, providing information about where and how the exception was thrown
         }
     }
-/*
-    private void savePrescriptionInfoToFile(ExaminationPortal.Prescription newPrescription) {
+
+ /*   private void savePrescriptionInfoToFile(ExaminationPortal.Prescription newPrescription) {
         String prescriptionFileName = newPrescription.getPatientName() + "_Medication.txt";      // Create a patient file named Name_Medication.txt
 
         try (FileWriter fileWriter = new FileWriter(prescriptionFileName)) {                    // Open try block and used for exception handling and ensures fileWriter resource is used properly
@@ -166,6 +166,6 @@ public class Patient extends Account
         } catch (IOException event) {       // This line starts a catch block and specifies that if an IOException occurs within the try block, the following code will handle the exception
             event.printStackTrace();        // prints the stack trace of the exception that occurred, providing information about where and how the exception was thrown
         }
-    }
-    */
+    } */
+
 }

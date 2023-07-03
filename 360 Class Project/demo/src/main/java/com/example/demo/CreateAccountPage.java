@@ -282,8 +282,7 @@ public class CreateAccountPage
             String password = passwordField.getText();
 
             String email = "no";
-            Account newAccount = new Account(firstName,lastName, dateOfBirth, phoneNumber, email , username, password, false);
-                    newAccount.saveAccountInfoToFile();
+
 
             if(firstName.isEmpty() || lastName.isEmpty() || dateOfBirth == null || phoneNumber.isEmpty() || username.isEmpty() || password.isEmpty()) {
                 // Handle empty fields
@@ -295,12 +294,9 @@ public class CreateAccountPage
             else
             {
 
-                activeAccount.firstName = firstName;
-                activeAccount.lastName = lastName;
-                activeAccount.birthday = dateOfBirth;
-                activeAccount.phoneNum = phoneNumber;
-                activeAccount.username = username;
-                activeAccount.password = password;
+                Account newAccount = new Account(firstName,lastName, dateOfBirth, phoneNumber, email , username, password, false);
+                newAccount.saveAccountInfoToFile();
+                System.out.println("Successful  Save");
 
                 LoginPage loginPage = new LoginPage(stage);
                 loginPage.show();
